@@ -1,0 +1,17 @@
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+.li {
+    list-style: none;
+}
+
+.list {
+    max-height: 100vh;
+    overflow-y: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    width: 100%;
+}
