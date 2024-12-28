@@ -24,7 +24,7 @@ const slice = createSlice({
         state.items.push(action.payload);
       })
       .addCase(deleteContact.fulfilled, (state, action) => {
-        state.items = state.items.filter((item) => item.id !== action.payload);
+        state.items = state.items.filter((item) => item._id !== action.payload);
       })
       .addCase(logout.fulfilled, (state) => {
         state.items = [];
@@ -70,10 +70,11 @@ export const selectFilteredContacts = createSelector(
   [selectContacts, selectNameFilter, selectNumberFilter],
   (contacts, nameFilter, numberFilter) => {
     return contacts.filter((contact) => {
-      const matchesName = contact.name
-        .toLowerCase()
-        .includes(nameFilter.toLowerCase());
-      const matchesNumber = contact.phoneNumber.includes(numberFilter);
+      const matchesName =
+        contact.name &&
+        contact.name.toLowerCase().includes(nameFilter.toLowerCase());
+      const matchesNumber =
+        contact.phoneNumber && contact.phoneNumber.includes(numberFilter);
 
       return matchesName && matchesNumber;
     });

@@ -60,7 +60,7 @@ const ContactList = () => {
             variants={itemVariants}
             layout
             className="w-full"
-            key={contact.id}
+            key={contact._id}
           >
             <Contact contact={contact} />
           </motion.li>

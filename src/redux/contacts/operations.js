@@ -1,18 +1,23 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { goitApi, mongodb } from "../auth/operations";
+import { mongodb } from "../auth/operations";
 import toast from "react-hot-toast";
 
 export const fetchContacts = createAsyncThunk(
   "fetchAll",
-  async (_, thunkApi) => {
+  async (perPage = 50, thunkApi) => {
     try {
       const {
         data: { data },
-      } = await mongodb.get("/contacts");
-      console.log(data);
+      } = await mongodb.get("/contacts", {
+        params: {
+          perPage,
+        },
+      });
+
       if (data) {
-        toast.success(`На сервері знайдено ${data.length} контактів`);
+        toast.success(`На сервері знайдено ${data.totalItems} контактів`);
       }
+
       return data.data;
     } catch (error) {
       toast.error(`Error ${error.message}`);
@@ -23,13 +28,14 @@ export const fetchContacts = createAsyncThunk(
 
 export const deleteContact = createAsyncThunk(
   "deleteContact",
-  async (id, thunkApi) => {
+  async (_id, thunkApi) => {
     try {
-      const { data } = await goitApi.delete(`/contacts/${id}`);
+      const { data } = await mongodb.delete(`/contacts/${_id}`);
+
       if (data) {
         toast.success(`Контакт видалено`);
       }
-      return data.id;
+      return _id;
     } catch (error) {
       toast.error(`Error ${error.message}`);
       return thunkApi.rejectWithValue(error.message);
@@ -41,15 +47,25 @@ export const addContact = createAsyncThunk(
   "addContact",
   async (body, thunkApi) => {
     try {
-      const { data } = await goitApi.post("/contacts", body);
+      console.log("Data being sent to API:", body);
+
+      const { data } = await mongodb.post("/contacts", body, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      console.log(data.data);
+
       if (data) {
         const loadingToastId = toast.loading("Saving...");
+        thunkApi.dispatch(fetchContacts(70));
         toast.dismiss(loadingToastId);
         toast.success(`Успішно додано контакт`);
       }
       return data;
     } catch (error) {
       toast.error(`Error ${error.message}`);
+      console.error("Error response:", error.response);
       return thunkApi.rejectWithValue(error.message);
     }
   }

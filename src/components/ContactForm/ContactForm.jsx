@@ -2,7 +2,6 @@ import { useId } from "react";
 import * as Yup from "yup";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useDispatch } from "react-redux";
-import { nanoid } from "nanoid";
 import { motion } from "framer-motion";
 import { slideInFromRight } from "../motion/motion";
 import { addContact } from "../../redux/contacts/operations";
@@ -11,11 +10,14 @@ const ContactForm = () => {
   const dispatch = useDispatch();
 
   const handleSubmit = (values, { resetForm }) => {
+    console.log("Submitting values:", values);
     dispatch(
       addContact({
-        id: nanoid(),
+        // id: nanoid(),
         name: values.name,
-        number: values.number,
+        phoneNumber: values.phoneNumber,
+        contactType: values.contactType,
+        email: values.email,
       })
     );
     resetForm();
@@ -23,12 +25,14 @@ const ContactForm = () => {
 
   const nameId = useId();
   const phoneId = useId();
+  const contactTypeId = useId();
+  const emailId = useId();
   const FeedbackSchema = Yup.object().shape({
     name: Yup.string()
       .min(3, "Занадто коротке ім'я!")
       .max(50, "Занадто довге ім'я!")
       .required("Ім'я є обов'язковим"),
-    number: Yup.string()
+    phoneNumber: Yup.string()
       .matches(
         /^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,14}(\s*)?$/,
         "Номер не валідний"
@@ -36,11 +40,19 @@ const ContactForm = () => {
       .min(3, "Занадто короткий номер")
       .max(50, "Занадто довгий номер")
       .required("Номер телефону є обов'язковим"),
+    contactType: Yup.string()
+      .oneOf(["work", "home", "personal"], "Invalid contact type")
+      .required("Contact type is required"),
+    email: Yup.string()
+      .email("Невірний формат електронної пошти")
+      .required("Електронна пошта є обов'язковою"),
   });
 
   const initialValues = {
     name: "",
-    number: "",
+    phoneNumber: "",
+    contactType: "",
+    email: "",
   };
 
   return (
@@ -82,11 +94,41 @@ const ContactForm = () => {
             >
               <Field
                 type="tel"
-                name="number"
+                name="phoneNumber"
                 id={phoneId}
                 placeholder="+38 (000) 000-00-00"
               />
-              <ErrorMessage name="number" component="span" />
+              <ErrorMessage name="phoneNumber" component="span" />
+            </label>
+          </div>
+          <div>
+            <label
+              className="w-3/4 flex flex-col border-solid border-2 border-black"
+              htmlFor={emailId}
+            >
+              <Field
+                type="email"
+                name="email"
+                id={emailId}
+                placeholder="Enter your email"
+              />
+              <ErrorMessage name="email" component="span" />
+            </label>
+          </div>
+          <div>
+            <label
+              className="w-3/4 flex flex-col border-solid border-2 border-black"
+              htmlFor={contactTypeId}
+            >
+              <Field as="select" name="contactType" id={contactTypeId}>
+                <option value="" disabled>
+                  Select contact type
+                </option>
+                <option value="work">Work</option>
+                <option value="home">Home</option>
+                <option value="personal">Personal</option>
+              </Field>
+              <ErrorMessage name="contactType" component="span" />
             </label>
           </div>
           <button

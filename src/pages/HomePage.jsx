@@ -43,7 +43,7 @@ const Home = () => {
               transition={{ delay: 3, duration: 2 }}
               className="text-5xl sm:text-7xl md:text-9xl font-bold animate-textColorChange mb-10"
             >
-              {user.name}`s Phone Book
+              {/* {user.name}`s Phone Book */}
             </motion.h1>
             <motion.div
               initial="hidden"
