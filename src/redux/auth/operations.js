@@ -37,13 +37,11 @@ export const login = createAsyncThunk(
   async (credentials, thunkApi) => {
     try {
       const { data } = await mongodb.post("auth/login", credentials);
-      console.log(data);
-
       toast.success("Success");
       setAuthHeader(data.data.accessToken);
       return data;
     } catch (error) {
-      toast.error(error.message);
+      toast.error(`why${error.message}`);
       return thunkApi.rejectWithValue(error.message);
     }
   }
@@ -68,7 +66,7 @@ export const refresh = createAsyncThunk("refresh", async (_, thunkApi) => {
     setAuthHeader(savedToken);
 
     const { data } = await mongodb.get("auth/refresh");
-    return data;
+    return data.data;
   } catch (error) {
     return thunkApi.rejectWithValue(error.message);
   }

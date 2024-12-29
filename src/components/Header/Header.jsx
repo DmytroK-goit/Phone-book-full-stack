@@ -4,7 +4,7 @@ import clsx from "clsx";
 import { useDispatch, useSelector } from "react-redux";
 import { motion } from "framer-motion";
 
-import { selectIsLoggedIn, selectUser } from "../../redux/auth/selectors";
+import { selectIsLoggedIn, selectUserName } from "../../redux/auth/selectors";
 import { logout } from "../../redux/auth/operations";
 
 const Header = () => {
@@ -12,7 +12,8 @@ const Header = () => {
     return clsx(s.link, isActive && s.activeLink);
   };
   const dispatch = useDispatch();
-  const user = useSelector(selectUser);
+
+  const userName = useSelector(selectUserName);
   const isLoggedIn = useSelector(selectIsLoggedIn);
   return (
     <div className="flex bg-teal-600 text-white	p-5 justify-between items-center flex-col	sm:flex-row ">
@@ -29,7 +30,7 @@ const Header = () => {
           transition={{ duration: 0.4 }}
           className="text-sm sm:text-base items-center lg:text-4xl"
         >
-          {/* Welcome, {user.name} */}
+          Welcome, {userName}
         </motion.div>
       )}
       <div className="flex justify-between items-center gap-5">
