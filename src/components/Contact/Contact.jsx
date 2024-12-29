@@ -1,4 +1,3 @@
-import s from "./Contact.module.css";
 import { IoPeopleSharp } from "react-icons/io5";
 import { FaPhoneAlt } from "react-icons/fa";
 import { TfiEmail } from "react-icons/tfi";
@@ -27,7 +26,7 @@ const Contact = ({ contact }) => {
           <img
             src={photo}
             alt="avatar"
-            className="w-10 h-10 rounded-full object-cover"
+            className="w-20 h-20 rounded-full object-cover"
           />
         </div>
         <div className="contact-info flex items-center gap-2 pb-4">

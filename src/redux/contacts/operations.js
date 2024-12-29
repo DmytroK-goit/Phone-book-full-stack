@@ -47,15 +47,11 @@ export const addContact = createAsyncThunk(
   "addContact",
   async (body, thunkApi) => {
     try {
-      console.log("Data being sent to API:", body);
-
       const { data } = await mongodb.post("/contacts", body, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
-      console.log(data.data);
-
       if (data) {
         const loadingToastId = toast.loading("Saving...");
         thunkApi.dispatch(fetchContacts(70));

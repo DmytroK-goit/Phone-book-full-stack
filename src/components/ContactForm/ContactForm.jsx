@@ -13,11 +13,11 @@ const ContactForm = () => {
     console.log("Submitting values:", values);
     dispatch(
       addContact({
-        // id: nanoid(),
         name: values.name,
         phoneNumber: values.phoneNumber,
         contactType: values.contactType,
         email: values.email,
+        photo: values.photo,
       })
     );
     resetForm();
@@ -27,6 +27,8 @@ const ContactForm = () => {
   const phoneId = useId();
   const contactTypeId = useId();
   const emailId = useId();
+  const photoId = useId();
+
   const FeedbackSchema = Yup.object().shape({
     name: Yup.string()
       .min(3, "Занадто коротке ім'я!")
@@ -46,6 +48,21 @@ const ContactForm = () => {
     email: Yup.string()
       .email("Невірний формат електронної пошти")
       .required("Електронна пошта є обов'язковою"),
+    photo: Yup.mixed()
+      .nullable()
+      .test(
+        "fileSize",
+        "Файл занадто великий",
+        (value) => !value || (value && value.size <= 5 * 1024 * 1024) // <= 5MB
+      )
+      .test(
+        "fileType",
+        "Неправильний тип файлу",
+        (value) =>
+          !value ||
+          (value &&
+            ["image/jpeg", "image/png", "image/jpg"].includes(value.type))
+      ),
   });
 
   const initialValues = {
@@ -53,6 +70,7 @@ const ContactForm = () => {
     phoneNumber: "",
     contactType: "",
     email: "",
+    photo: null,
   };
 
   return (
@@ -66,78 +84,97 @@ const ContactForm = () => {
         onSubmit={handleSubmit}
         validationSchema={FeedbackSchema}
       >
-        <Form
-          className="w-full p-5 sm:w-3/4 sm:p-10 md:w-2/3 lg:w-1/3 xl: flex gap-8 flex-col bg-amber-500  rounded-2xl mb-10 border-solid border-2 border-black"
-          style={{
-            boxShadow: "15px 15px 10px rgb(190, 126, 30)",
-            backgroundColor: " burlywood",
-          }}
-        >
-          <div>
-            <label
-              className="w-3/4 flex flex-col border-solid border-2 border-black"
-              htmlFor={nameId}
-            >
-              <Field
-                type="text"
-                name="name"
-                id={nameId}
-                placeholder="Enter your name"
-              />
-              <ErrorMessage name="name" component="span" />
-            </label>
-          </div>
-          <div>
-            <label
-              className="w-3/4 flex flex-col border-solid border-2 border-black"
-              htmlFor={phoneId}
-            >
-              <Field
-                type="tel"
-                name="phoneNumber"
-                id={phoneId}
-                placeholder="+38 (000) 000-00-00"
-              />
-              <ErrorMessage name="phoneNumber" component="span" />
-            </label>
-          </div>
-          <div>
-            <label
-              className="w-3/4 flex flex-col border-solid border-2 border-black"
-              htmlFor={emailId}
-            >
-              <Field
-                type="email"
-                name="email"
-                id={emailId}
-                placeholder="Enter your email"
-              />
-              <ErrorMessage name="email" component="span" />
-            </label>
-          </div>
-          <div>
-            <label
-              className="w-3/4 flex flex-col border-solid border-2 border-black"
-              htmlFor={contactTypeId}
-            >
-              <Field as="select" name="contactType" id={contactTypeId}>
-                <option value="" disabled>
-                  Select contact type
-                </option>
-                <option value="work">Work</option>
-                <option value="home">Home</option>
-                <option value="personal">Personal</option>
-              </Field>
-              <ErrorMessage name="contactType" component="span" />
-            </label>
-          </div>
-          <button
-            className="w-2/3 flex rounded-2xl justify-center text-gray-50 border-black border-solid bg-indigo-700 border-2 border-indigo-600  transition-transform duration-200 hover:scale-110 sm:w-1/3"
-            type="submit"
+        {({ setFieldValue }) => (
+          <Form
+            className="w-full p-5 sm:w-3/4 sm:p-10 md:w-2/3 lg:w-1/3 xl: flex gap-8 flex-col bg-amber-500  rounded-2xl mb-10 border-solid border-2 border-black"
+            style={{
+              boxShadow: "15px 15px 10px rgb(190, 126, 30)",
+              backgroundColor: "burlywood",
+            }}
           >
-            Add contact
-          </button>
-        </Form>
+            <div>
+              <label
+                className="w-3/4 flex flex-col border-solid border-2 border-black"
+                htmlFor={nameId}
+              >
+                <Field
+                  type="text"
+                  name="name"
+                  id={nameId}
+                  placeholder="Enter your name"
+                />
+                <ErrorMessage name="name" component="span" />
+              </label>
+            </div>
+            <div>
+              <label
+                className="w-3/4 flex flex-col border-solid border-2 border-black"
+                htmlFor={phoneId}
+              >
+                <Field
+                  type="tel"
+                  name="phoneNumber"
+                  id={phoneId}
+                  placeholder="+38 (000) 000-00-00"
+                />
+                <ErrorMessage name="phoneNumber" component="span" />
+              </label>
+            </div>
+            <div>
+              <label
+                className="w-3/4 flex flex-col border-solid border-2 border-black"
+                htmlFor={emailId}
+              >
+                <Field
+                  type="email"
+                  name="email"
+                  id={emailId}
+                  placeholder="Enter your email"
+                />
+                <ErrorMessage name="email" component="span" />
+              </label>
+            </div>
+            <div>
+              <label
+                className="w-3/4 flex flex-col border-solid border-2 border-black"
+                htmlFor={contactTypeId}
+              >
+                <Field as="select" name="contactType" id={contactTypeId}>
+                  <option value="" disabled>
+                    Select contact type
+                  </option>
+                  <option value="work">Work</option>
+                  <option value="home">Home</option>
+                  <option value="personal">Personal</option>
+                </Field>
+                <ErrorMessage name="contactType" component="span" />
+              </label>
+            </div>
+            <div>
+              <label
+                className="w-3/4 flex flex-col border-solid border-2 border-black"
+                htmlFor={photoId}
+              >
+                <input
+                  type="file"
+                  id={photoId}
+                  name="photo"
+                  accept="image/jpeg, image/png, image/jpg"
+                  onChange={(event) => {
+                    setFieldValue("photo", event.currentTarget.files[0]);
+                  }}
+                />
+                <ErrorMessage name="photo" component="span" />
+              </label>
+            </div>
+            <button
+              className="w-2/3 flex rounded-2xl justify-center text-gray-50 border-black border-solid bg-indigo-700 border-2 border-indigo-600  transition-transform duration-200 hover:scale-110 sm:w-1/3"
+              type="submit"
+            >
+              Add contact
+            </button>
+          </Form>
+        )}
       </Formik>
     </motion.div>
   );
