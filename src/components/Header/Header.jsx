@@ -16,7 +16,7 @@ const Header = () => {
   const userName = useSelector(selectUserName);
   const isLoggedIn = useSelector(selectIsLoggedIn);
   return (
-    <div className="flex bg-teal-600 text-white	p-5 justify-between items-center flex-col	sm:flex-row ">
+    <div className="flex bg-gradient-to-r from-gray-900 via-gray-700 to-black text-white	p-5 justify-between items-center flex-col	sm:flex-row ">
       <motion.div
         whileHover={{ scale: 1.2 }}
         transition={{ duration: 0.2 }}

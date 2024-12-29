@@ -38,8 +38,10 @@ const ContactList = () => {
 
   return (
     <div className="p-5">
-      <ContactForm />
-      <SearchBox />
+      <div className="flex flex-col sm:flex-row sm:space-x-20">
+        <ContactForm className="w-1/3 sm:w-1/2 lg:w-1/3" />
+        <SearchBox className="w-full sm:w-1/2 lg:w-1/3" />
+      </div>
 
       <motion.h2
         initial="hidden"

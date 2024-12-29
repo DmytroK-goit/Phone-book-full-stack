@@ -1,10 +1,6 @@
 import "animate.css";
 import { useSelector } from "react-redux";
-import {
-  selectIsLoggedIn,
-  selectUser,
-  selectUserName,
-} from "../redux/auth/selectors";
+import { selectIsLoggedIn, selectUserName } from "../redux/auth/selectors";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { slideInFromBot, slideInFromRight } from "../components/motion/motion";

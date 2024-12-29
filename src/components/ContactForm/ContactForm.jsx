@@ -86,12 +86,16 @@ const ContactForm = () => {
       >
         {({ setFieldValue }) => (
           <Form
-            className="w-full p-5 sm:w-3/4 sm:p-10 md:w-2/3 lg:w-1/3 xl: flex gap-8 flex-col bg-amber-500  rounded-2xl mb-10 border-solid border-2 border-black"
+            className="w-full p-5 sm:p-10 flex gap-8 flex-col bg-amber-500 rounded-2xl mb-10 border-solid border-2 border-black"
             style={{
-              boxShadow: "15px 15px 10px rgb(190, 126, 30)",
-              backgroundColor: "burlywood",
+              boxShadow: "15px 15px 10px rgba(255, 223, 186, 0.8)", // Тінь для світлого вигляду
+              backgroundImage: "linear-gradient(to right, #fceabb, #f8b500)", // Світлий градієнт
+              color: "black", // Темний текст для контрасту
             }}
           >
+            <h3 className="text-xl font-bold text-center py-3 px-5 rounded-lg bg-gradient-to-r from-orange-300 to-yellow-400 text-black shadow-md">
+              Contact Form
+            </h3>
             <div>
               <label
                 className="w-3/4 flex flex-col border-solid border-2 border-black"

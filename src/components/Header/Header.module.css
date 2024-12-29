@@ -8,12 +8,12 @@
 }
 
 .link {
-  color: white;
+  color: rgb(245, 248, 247);
   font-weight: bold;
 }
 
 .activeLink {
-  color: black;
+  color: rgb(27, 207, 57);
 }
 
 .wrapperLinks {

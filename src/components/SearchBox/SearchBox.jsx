@@ -23,12 +23,16 @@ const SearchBox = () => {
       variants={slideInFromRight()}
     >
       <form
-        className="w-full sm:w-3/4 md:w-2/3 lg:w-1/3 xl: flex gap-8 flex-col bg-amber-500 p-10 rounded-2xl mb-10 border-solid border-2 border-black"
+        className="w-full flex gap-8 flex-col bg-amber-500 p-10 rounded-2xl mb-10 border-solid border-2 border-black"
         style={{
-          boxShadow: "15px 15px 10px rgb(190, 126, 30)",
-          backgroundColor: " burlywood",
+          boxShadow: "15px 15px 10px rgba(255, 223, 186, 0.8)",
+          backgroundImage: "linear-gradient(to right, #fceabb, #f8b500)",
+          color: "black",
         }}
       >
+        <h3 className="text-xl font-bold text-center py-3 px-5 rounded-lg bg-gradient-to-r from-orange-300 to-yellow-400 text-black shadow-md">
+          Search form
+        </h3>
         <label className="w-3/4 flex flex-col " htmlFor={searchIdName}>
           Find contacts by name
           <input
