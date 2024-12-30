@@ -7,6 +7,8 @@ import { logout } from "../auth/operations";
 const initialState = {
   items: [],
   searchStr: "",
+  currentPage: 1,
+  totalPages: 1,
   isLoading: false,
   isError: false,
 };
@@ -14,11 +16,18 @@ const initialState = {
 const slice = createSlice({
   name: "contacts",
   initialState: initialState,
+  reducers: {
+    setPage: (state, action) => {
+      state.currentPage = action.payload;
+    },
+  },
 
   extraReducers: (builder) => {
     builder
       .addCase(fetchContacts.fulfilled, (state, action) => {
-        state.items = action.payload;
+        state.items = action.payload.data;
+        state.currentPage = action.payload.page;
+        state.totalPages = action.payload.totalPages;
       })
       .addCase(addContact.fulfilled, (state, action) => {
         state.items.push(action.payload);
@@ -64,6 +73,7 @@ const slice = createSlice({
       );
   },
 });
+export const { setPage } = slice.actions;
 export const contactsReducer = slice.reducer;
 
 export const selectFilteredContacts = createSelector(

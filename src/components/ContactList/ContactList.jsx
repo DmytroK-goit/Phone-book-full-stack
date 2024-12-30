@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { slideInFromRight } from "../motion/motion";
 import { fetchContacts } from "../../redux/contacts/operations";
+import Pagination from "../Pagination/pagination";
 
 const itemVariants = {
   hidden: { opacity: 0, scale: 0.8 },
@@ -24,10 +25,11 @@ const itemVariants = {
 const ContactList = () => {
   const dispatch = useDispatch();
   const contacts = useSelector(selectFilteredContacts);
+  const { currentPage, totalPages } = useSelector((state) => state.contacts);
   const [isFirstRender, setIsFirstRender] = useState(true);
 
   useEffect(() => {
-    dispatch(fetchContacts());
+    dispatch(fetchContacts({ perPage: 10, page: 1 }));
   }, [dispatch]);
 
   useEffect(() => {
@@ -50,7 +52,8 @@ const ContactList = () => {
         className="text-xl my-20 shadow-1xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-black"
         style={{ boxShadow: "15px 15px 10px rgb(190, 126, 30)" }}
       >
-        Contacts List : {contacts.length} contacts.
+        Contacts List: {contacts.length} contacts (Page {currentPage} of{" "}
+        {totalPages})
       </motion.h2>
 
       <ul className="grid gap-4 grid-cols-1 place-items-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
@@ -68,6 +71,7 @@ const ContactList = () => {
           </motion.li>
         ))}
       </ul>
+      <Pagination />
     </div>
   );
 };
