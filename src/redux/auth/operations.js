@@ -69,11 +69,7 @@ export const refresh = createAsyncThunk("refresh", async (_, thunkApi) => {
     }
 
     setAuthHeader(savedToken);
-    const { data } = await mongodb.post(
-      "auth/refresh",
-      {},
-      { withCredentials: true }
-    );
+    const { data } = await mongodb.post("auth/refresh");
     return data.data;
   } catch (error) {
     return thunkApi.rejectWithValue(
