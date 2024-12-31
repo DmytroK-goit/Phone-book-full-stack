@@ -12,6 +12,10 @@ export const mongodb = axios.create({
 const setAuthHeader = (token) => {
   if (token) {
     mongodb.defaults.headers.common.Authorization = `Bearer ${token}`;
+    console.log(
+      "Authorization Header:",
+      mongodb.defaults.headers.common.Authorization
+    );
   } else {
     delete mongodb.defaults.headers.common.Authorization;
   }
@@ -59,20 +63,19 @@ export const logout = createAsyncThunk("logout", async (_, thunkApi) => {
 export const refresh = createAsyncThunk("refresh", async (_, thunkApi) => {
   try {
     const savedToken = thunkApi.getState().auth.token;
-    console.log("Saved Token:", savedToken);
-
+    console.log(savedToken);
     if (!savedToken) {
       return thunkApi.rejectWithValue("Token does not exist!");
     }
 
     setAuthHeader(savedToken);
-    const { data } = await mongodb.post("auth/refresh", null, {
-      withCredentials: true,
-    });
-    console.log("Refresh Response:", data);
+    const { data } = await mongodb.post(
+      "auth/refresh",
+      {},
+      { withCredentials: true }
+    );
     return data.data;
   } catch (error) {
-    console.error("Refresh error:", error.response?.data || error.message);
     return thunkApi.rejectWithValue(
       error.response?.data?.message || "Refresh failed"
     );
