@@ -59,15 +59,22 @@ export const logout = createAsyncThunk("logout", async (_, thunkApi) => {
 export const refresh = createAsyncThunk("refresh", async (_, thunkApi) => {
   try {
     const savedToken = thunkApi.getState().auth.token;
+    console.log("Saved Token:", savedToken);
+
     if (!savedToken) {
       return thunkApi.rejectWithValue("Token does not exist!");
     }
 
     setAuthHeader(savedToken);
-
-    const { data } = await mongodb.get("auth/refresh");
+    const { data } = await mongodb.post("auth/refresh", null, {
+      withCredentials: true,
+    });
+    console.log("Refresh Response:", data);
     return data.data;
   } catch (error) {
-    return thunkApi.rejectWithValue(error.message);
+    console.error("Refresh error:", error.response?.data || error.message);
+    return thunkApi.rejectWithValue(
+      error.response?.data?.message || "Refresh failed"
+    );
   }
 });
