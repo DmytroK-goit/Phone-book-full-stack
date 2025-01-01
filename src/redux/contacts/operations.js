@@ -53,7 +53,11 @@ export const editContact = createAsyncThunk(
   async ({ _id, updatedData }, thunkApi) => {
     try {
       console.log("start edit");
-      const { data } = await mongodb.patch(`/contacts/${_id}`, updatedData);
+      const { data } = await mongodb.patch(`/contacts/${_id}`, updatedData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
 
       toast.success(`Контакт оновлено: ${data.data.name}`);
       return data.data;

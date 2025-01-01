@@ -13,9 +13,6 @@ const EditContactModal = ({ contact, onClose }) => {
     phoneNumber: contact.phoneNumber || "",
     email: contact.email || "",
     contactType: contact.contactType || "",
-    photo:
-      contact.photo ||
-      "https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png",
   };
 
   const handleSubmit = (values) => {
@@ -65,15 +62,6 @@ const EditContactModal = ({ contact, onClose }) => {
                 required
               />
             </div>
-            <div className="mb-4">
-              <Field
-                name="photo"
-                type="text"
-                placeholder="Photo URL"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                required
-              />
-            </div>
             <div className="flex justify-end mt-4">
               <button
                 type="submit"
@@ -105,7 +93,6 @@ EditContactModal.propTypes = {
     phoneNumber: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
     contactType: PropTypes.string.isRequired,
-    photo: PropTypes.string,
   }).isRequired,
   onClose: PropTypes.func.isRequired,
 };
