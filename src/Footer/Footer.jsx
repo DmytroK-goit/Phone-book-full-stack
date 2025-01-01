@@ -1,5 +1,3 @@
-// import s from "./Header.module.css";
-
 const Footer = () => {
   return (
     <div className="flex bg-gradient-to-r from-gray-900 via-gray-700 to-black text-white p-5 justify-between items-center flex-col sm:flex-row">
