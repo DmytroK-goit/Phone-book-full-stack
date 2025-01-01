@@ -1,5 +1,10 @@
 import { createSelector, createSlice, isAnyOf } from "@reduxjs/toolkit";
-import { fetchContacts, addContact, deleteContact } from "./operations";
+import {
+  fetchContacts,
+  addContact,
+  deleteContact,
+  editContact,
+} from "./operations";
 import { selectContacts, selectNameFilter } from "./selectors";
 import { selectNumberFilter } from "../filters/selectors";
 import { logout } from "../auth/operations";
@@ -37,6 +42,15 @@ const slice = createSlice({
       })
       .addCase(logout.fulfilled, (state) => {
         state.items = [];
+      })
+      .addCase(editContact.fulfilled, (state, action) => {
+        // Знаходимо контакт за ID і оновлюємо його дані
+        const index = state.items.findIndex(
+          (contact) => contact._id === action.payload._id
+        );
+        if (index !== -1) {
+          state.items[index] = { ...state.items[index], ...action.payload };
+        }
       })
 
       .addMatcher(

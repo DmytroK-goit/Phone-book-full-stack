@@ -7,12 +7,28 @@ import { motion } from "framer-motion";
 
 import PropTypes from "prop-types";
 import { deleteContact } from "../../redux/contacts/operations";
+import { editContact } from "../../redux/contacts/operations";
+import { useState } from "react";
+import EditContactModal from "../EditContactModal/EditContactModal";
 
 const Contact = ({ contact }) => {
   const { _id, name, phoneNumber, email, contactType, photo } = contact;
   const dispatch = useDispatch();
-  const handleDelete = () => dispatch(deleteContact(_id));
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const handleDelete = () => {
+    if (window.confirm("Are you sure you want to delete this contact?")) {
+      dispatch(deleteContact(_id));
+    }
+  };
+  const handleEdit = () => {
+    console.log("Edit button clicked");
+    if (_id) {
+      setIsModalOpen(true);
+      console.log(_id);
+    } else {
+      console.error("Не можна редагувати контакт: ID не визначено");
+    }
+  };
   return (
     <motion.div
       whileHover={{ scale: 1.01, y: -20 }}
@@ -45,13 +61,29 @@ const Contact = ({ contact }) => {
           <span className="font-medium text-gray-600">{contactType}</span>
         </div>
       </div>
-      <button
-        className="w-1/3 rounded-full bg-red-500 text-white p-3 md:p-4 lg:p-5 hover:bg-red-600 transition-colors duration-200"
-        type="button"
-        onClick={handleDelete}
-      >
-        Delete
-      </button>
+      <div className="flex justify-between">
+        <button
+          className="w-1/3 rounded-full bg-red-500 text-white p-3 md:p-4 lg:p-5 hover:bg-red-600 transition-colors duration-200"
+          type="button"
+          onClick={handleDelete}
+        >
+          Delete
+        </button>
+        <button
+          className="w-1/3 rounded-full bg-green-500 text-white p-3 md:p-4 lg:p-5 hover:bg-green-700 transition-colors duration-200"
+          type="button"
+          onClick={handleEdit}
+        >
+          Edit
+        </button>
+      </div>
+
+      {isModalOpen && (
+        <EditContactModal
+          contact={contact}
+          onClose={() => setIsModalOpen(false)}
+        />
+      )}
     </motion.div>
   );
 };
@@ -63,7 +95,7 @@ Contact.propTypes = {
     phoneNumber: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
     contactType: PropTypes.string.isRequired,
-    photo: PropTypes.string.isRequired,
+    photo: PropTypes.string,
   }).isRequired,
 };
 export default Contact;
