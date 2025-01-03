@@ -56,7 +56,7 @@ const Pagination = () => {
           disabled={currentPage === 1}
           onClick={() => handlePageChange(currentPage - 1)}
         >
-          Попередня
+          Prev
         </button>
         {renderPageButtons()}
         <button
@@ -65,7 +65,7 @@ const Pagination = () => {
           disabled={currentPage === totalPages}
           onClick={() => handlePageChange(currentPage + 1)}
         >
-          Наступна
+          Next
         </button>
       </div>
     </div>

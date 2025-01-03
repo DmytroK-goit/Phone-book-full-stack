@@ -54,7 +54,6 @@ export const editContact = createAsyncThunk(
   "contacts/editContact",
   async ({ _id, updatedData }, thunkApi) => {
     try {
-      console.log("start edit");
       const { data } = await mongodb.patch(`/contacts/${_id}`, updatedData, {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -84,8 +83,6 @@ export const addContact = createAsyncThunk(
           "Content-Type": "multipart/form-data",
         },
       });
-      console.log(data.data);
-
       if (data) {
         const loadingToastId = toast.loading("Saving...");
         thunkApi.dispatch(fetchContacts(70));
