@@ -9,6 +9,7 @@ import { motion } from "framer-motion";
 import { slideInFromRight } from "../motion/motion";
 import { fetchContacts } from "../../redux/contacts/operations";
 import Pagination from "../Pagination/pagination";
+import SortForm from "../sortForm/sortForm";
 
 const itemVariants = {
   hidden: { opacity: 0, scale: 0.8 },
@@ -25,12 +26,14 @@ const itemVariants = {
 const ContactList = () => {
   const dispatch = useDispatch();
   const contacts = useSelector(selectFilteredContacts);
-  const { currentPage, totalPages } = useSelector((state) => state.contacts);
+  const { currentPage, totalPages, perPage, sortBy, sortOrder } = useSelector(
+    (state) => state.contacts
+  );
   const [isFirstRender, setIsFirstRender] = useState(true);
 
   useEffect(() => {
-    dispatch(fetchContacts({ perPage: 10, page: 1 }));
-  }, [dispatch]);
+    dispatch(fetchContacts({ perPage, page: currentPage, sortBy, sortOrder }));
+  }, [dispatch, perPage, currentPage, sortBy, sortOrder]);
 
   useEffect(() => {
     if (contacts.length > 0) {
@@ -43,6 +46,7 @@ const ContactList = () => {
       <div className="flex flex-col sm:flex-row sm:space-x-20">
         <ContactForm className="w-1/3 sm:w-1/2 lg:w-1/3" />
         <SearchBox className="w-full sm:w-1/2 lg:w-1/3" />
+        <SortForm className="w-full sm:w-1/2 lg:w-1/3" />
       </div>
 
       <motion.h2

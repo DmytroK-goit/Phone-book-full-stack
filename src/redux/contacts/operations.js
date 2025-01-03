@@ -3,27 +3,30 @@ import { mongodb } from "../auth/operations";
 import toast from "react-hot-toast";
 
 export const fetchContacts = createAsyncThunk(
-  "fetchAll",
-  async ({ perPage = 10, page = 1 }, thunkApi) => {
+  "contacts/fetchAll",
+  async (
+    { page = 1, perPage = 10, sortBy = "name", sortOrder = "asc" },
+    thunkApi
+  ) => {
     try {
-      console.log("Запит на сторінку:", "кількість:", perPage);
       const {
         data: { data },
       } = await mongodb.get("/contacts", {
         params: {
-          perPage,
           page,
+          perPage,
+          sortBy,
+          sortOrder,
         },
       });
-      console.log("Отримані дані:", data);
-      if (data) {
-        toast.success(`На сервері знайдено ${data.totalItems} контактів`);
-      }
 
       return {
         data: data.data,
-        page: data.page, // поточна сторінка
-        totalPages: data.totalPages, // загальна кількість сторінок
+        page: data.page,
+        totalPages: data.totalPages,
+        perPage: data.perPage,
+        sortBy: data.sortBy,
+        sortOrder: data.sortOrder,
       };
     } catch (error) {
       toast.error(`Error ${error.message}`);
@@ -31,7 +34,6 @@ export const fetchContacts = createAsyncThunk(
     }
   }
 );
-
 export const deleteContact = createAsyncThunk(
   "deleteContact",
   async (_id, thunkApi) => {

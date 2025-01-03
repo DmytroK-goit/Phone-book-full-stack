@@ -12,10 +12,13 @@ import { logout } from "../auth/operations";
 const initialState = {
   items: [],
   searchStr: "",
+  totalPages: 0,
   currentPage: 1,
-  totalPages: 1,
+  perPage: 10,
+  sortBy: "name",
+  sortOrder: "asc",
   isLoading: false,
-  isError: false,
+  error: null,
 };
 
 const slice = createSlice({
@@ -25,14 +28,31 @@ const slice = createSlice({
     setPage: (state, action) => {
       state.currentPage = action.payload;
     },
+    setSorting: (state, action) => {
+      state.sortBy = action.payload.sortBy;
+      state.sortOrder = action.payload.sortOrder;
+    },
+    setPerPage: (state, action) => {
+      state.perPage = action.payload;
+    },
+    resetState: (state) => {
+      state.items = [];
+      state.currentPage = 1;
+      state.perPage = 10;
+      state.sortBy = "name";
+      state.sortOrder = "asc";
+    },
   },
 
   extraReducers: (builder) => {
     builder
       .addCase(fetchContacts.fulfilled, (state, action) => {
         state.items = action.payload.data;
-        state.currentPage = action.payload.page;
-        state.totalPages = action.payload.totalPages;
+        state.currentPage = action.payload.page || state.currentPage;
+        state.totalPages = action.payload.totalPages || state.totalPages;
+        state.perPage = action.payload.perPage || state.perPage;
+        state.sortBy = action.payload.sortBy || state.sortBy;
+        state.sortOrder = action.payload.sortOrder || state.sortOrder;
       })
       .addCase(addContact.fulfilled, (state, action) => {
         state.items.push(action.payload);
@@ -44,7 +64,6 @@ const slice = createSlice({
         state.items = [];
       })
       .addCase(editContact.fulfilled, (state, action) => {
-        // Знаходимо контакт за ID і оновлюємо його дані
         const index = state.items.findIndex(
           (contact) => contact._id === action.payload._id
         );
@@ -87,7 +106,8 @@ const slice = createSlice({
       );
   },
 });
-export const { setPage } = slice.actions;
+
+export const { setPage, setSorting, setPerPage } = slice.actions;
 export const contactsReducer = slice.reducer;
 
 export const selectFilteredContacts = createSelector(
