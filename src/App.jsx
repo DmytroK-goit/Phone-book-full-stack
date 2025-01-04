@@ -58,7 +58,7 @@ function App() {
           path="send-reset-email"
           element={<RestrictedRoute component={<SendResEmail />} />}
         />
-        <Route path="reset-pwd" element={<ResetPassword />} />
+        <Route path="auth/reset-pwd" element={<ResetPassword />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </AnimatePresence>
