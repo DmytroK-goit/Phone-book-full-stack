@@ -94,10 +94,7 @@ export const resetPwd = createAsyncThunk(
   "auth/resetPwd",
   async (credentials, thunkApi) => {
     try {
-      const { data } = await axios.post(
-        "http://localhost:5173/reset-pwd",
-        credentials
-      );
+      const { data } = await axios.post("/auth/reset-pwd", credentials);
       toast.success(data.message || "Password has been successfully reset!");
       return data;
     } catch (error) {
