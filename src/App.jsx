@@ -13,6 +13,8 @@ import { refresh } from "./redux/auth/operations";
 import { AnimatePresence } from "framer-motion";
 import { selectIsRefreshing } from "./redux/auth/selectors";
 import { LoadingSpinner } from "./components/loader/loader";
+import SendResEmail from "./pages/SendResEmail";
+import ResetPassword from "./pages/ResetPassword";
 
 function App() {
   const isRefreshing = useSelector(selectIsRefreshing);
@@ -52,6 +54,11 @@ function App() {
             />
           }
         />
+        <Route
+          path="send-reset-email"
+          element={<RestrictedRoute component={<SendResEmail />} />}
+        />
+        <Route path="reset-pwd" element={<ResetPassword />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </AnimatePresence>

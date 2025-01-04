@@ -82,6 +82,12 @@ const Login = () => {
               >
                 Sign up
               </Link>
+              <Link
+                to="/send-reset-email"
+                className="w-3/4 mt-2 px-6 py-3 bg-orange-300 hover:bg-orange-500 text-black font-bold rounded-full text-lg transition duration-300 ease-in-out transform hover:scale-105"
+              >
+                Forgot password
+              </Link>
               <div className="form-control mt-6">
                 <button type="submit" className="btn btn-primary">
                   Login

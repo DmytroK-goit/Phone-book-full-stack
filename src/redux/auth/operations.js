@@ -77,3 +77,34 @@ export const refresh = createAsyncThunk("refresh", async (_, thunkApi) => {
     );
   }
 });
+export const resetUser = createAsyncThunk(
+  "resetUser",
+  async (credentials, thunkApi) => {
+    try {
+      const { data } = await mongodb.post("auth/send-reset-email", credentials);
+      toast.success("Success");
+      return data;
+    } catch (error) {
+      toast.error(error.message);
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+);
+export const resetPwd = createAsyncThunk(
+  "auth/resetPwd",
+  async (credentials, thunkApi) => {
+    try {
+      const { data } = await axios.post(
+        "http://localhost:5173/reset-pwd",
+        credentials
+      );
+      toast.success(data.message || "Password has been successfully reset!");
+      return data;
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Failed to reset password.");
+      return thunkApi.rejectWithValue(
+        error.response?.data?.message || error.message
+      );
+    }
+  }
+);
