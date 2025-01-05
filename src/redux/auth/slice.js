@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { login, logout, refresh, register } from "./operations";
+import { login, logout, refresh, register, resetPwd } from "./operations";
 import { contactsReducer } from "../contacts/slice";
 
 const initialState = {
@@ -38,6 +38,10 @@ const slice = createSlice({
         state.token = action.payload.accessToken;
         state.isLoggedIn = true;
         state.isRefreshing = false;
+      })
+      .addCase(resetPwd.fulfilled, (state, action) => {
+        state.token = action.payload.accessToken;
+        state.password = action.payload.password;
       })
       .addCase(refresh.rejected, (state) => {
         state.isRefreshing = false;

@@ -91,10 +91,12 @@ export const resetUser = createAsyncThunk(
   }
 );
 export const resetPwd = createAsyncThunk(
-  "auth/resetPwd",
+  "resetPwd",
   async (credentials, thunkApi) => {
     try {
-      const { data } = await axios.post("/auth/reset-pwd", credentials);
+      console.log(credentials);
+      const { data } = await mongodb.post("/auth/reset-pwd", credentials);
+      console.log(data.data);
       toast.success(data.message || "Password has been successfully reset!");
       return data;
     } catch (error) {
