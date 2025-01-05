@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+import Cookies from "js-cookie";
 import ContactList from "./components/ContactList/ContactList";
 import Layout from "./components/Layout";
 import Home from "./pages/HomePage";
@@ -20,7 +21,21 @@ function App() {
   const isRefreshing = useSelector(selectIsRefreshing);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(refresh());
+    console.log("useEffect triggered"); // Перевірте, чи цей лог спрацьовує
+    const refreshToken = Cookies.get("refreshToken");
+    console.log("Refresh token:", refreshToken); // Перевірте, чи є refreshToken в куках
+
+    if (refreshToken) {
+      dispatch(refresh())
+        .then(() => {
+          console.log("Refresh success");
+        })
+        .catch((err) => {
+          console.error("Error refreshing:", err);
+        });
+    } else {
+      console.log("No refresh token found");
+    }
   }, [dispatch]);
 
   if (isRefreshing) {

@@ -1,11 +1,9 @@
-import React from "react";
 import PropTypes from "prop-types";
 import { Formik, Form, Field } from "formik";
 import { useDispatch } from "react-redux";
-import { editContact } from "../../redux/contacts/operations"; // Import the action
+import { editContact } from "../../redux/contacts/operations";
 
 const EditContactModal = ({ contact, onClose }) => {
-  console.log("EditContactModal received contact:", contact);
   const dispatch = useDispatch();
 
   const initialValues = {

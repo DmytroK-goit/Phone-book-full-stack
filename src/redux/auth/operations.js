@@ -1,4 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import Cookies from "js-cookie";
 import axios from "axios";
 import toast from "react-hot-toast";
 
@@ -12,10 +13,6 @@ export const mongodb = axios.create({
 const setAuthHeader = (token) => {
   if (token) {
     mongodb.defaults.headers.common.Authorization = `Bearer ${token}`;
-    console.log(
-      "Authorization Header:",
-      mongodb.defaults.headers.common.Authorization
-    );
   } else {
     delete mongodb.defaults.headers.common.Authorization;
   }
@@ -61,17 +58,23 @@ export const logout = createAsyncThunk("logout", async (_, thunkApi) => {
 });
 
 export const refresh = createAsyncThunk("refresh", async (_, thunkApi) => {
+  console.log("refresh action triggered"); // Перевірте, чи цей лог спрацьовує
+
   try {
-    const savedToken = thunkApi.getState().auth.token;
-    console.log(savedToken);
-    if (!savedToken) {
-      return thunkApi.rejectWithValue("Token does not exist!");
+    const refreshToken = Cookies.get("refreshToken");
+    console.log("refreshToken in refresh action:", refreshToken); // Перевірте, чи є токен
+
+    if (!refreshToken) {
+      console.log("Refresh token missing");
+      return thunkApi.rejectWithValue("Refresh token missing");
     }
 
-    setAuthHeader(savedToken);
     const { data } = await mongodb.post("auth/refresh");
+    console.log("Response from refresh request:", data); // Перевірте відповідь від сервера
+
     return data.data;
   } catch (error) {
+    console.error("Error in refresh action:", error); // Логування помилки
     return thunkApi.rejectWithValue(
       error.response?.data?.message || "Refresh failed"
     );
@@ -96,7 +99,6 @@ export const resetPwd = createAsyncThunk(
     try {
       console.log(credentials);
       const { data } = await mongodb.post("/auth/reset-pwd", credentials);
-      console.log(data.data);
       toast.success(data.message || "Password has been successfully reset!");
       return data;
     } catch (error) {

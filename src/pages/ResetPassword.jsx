@@ -33,7 +33,7 @@ const ResetPassword = () => {
       .unwrap()
       .then(() => {
         toast.success("Password reset successfully!");
-        navigate("/login"); // Перенаправлення після успіху
+        navigate("/login");
       })
       .catch(() => {
         toast.error("Failed to reset password.");

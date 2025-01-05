@@ -7,7 +7,6 @@ import { motion } from "framer-motion";
 
 import PropTypes from "prop-types";
 import { deleteContact } from "../../redux/contacts/operations";
-import { editContact } from "../../redux/contacts/operations";
 import { useState } from "react";
 import EditContactModal from "../EditContactModal/EditContactModal";
 
@@ -21,10 +20,8 @@ const Contact = ({ contact }) => {
     }
   };
   const handleEdit = () => {
-    console.log("Edit button clicked");
     if (_id) {
       setIsModalOpen(true);
-      console.log(_id);
     } else {
       console.error("Не можна редагувати контакт: ID не визначено");
     }
