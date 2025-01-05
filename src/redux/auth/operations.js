@@ -17,6 +17,7 @@ const setAuthHeader = (token) => {
     delete mongodb.defaults.headers.common.Authorization;
   }
 };
+axios.defaults.withCredentials = true;
 
 export const register = createAsyncThunk(
   "register",
@@ -58,28 +59,33 @@ export const logout = createAsyncThunk("logout", async (_, thunkApi) => {
 });
 
 export const refresh = createAsyncThunk("refresh", async (_, thunkApi) => {
-  console.log("refresh action triggered"); // Перевірте, чи цей лог спрацьовує
-
   try {
     const refreshToken = Cookies.get("refreshToken");
-    console.log("refreshToken in refresh action:", refreshToken); // Перевірте, чи є токен
 
     if (!refreshToken) {
-      console.log("Refresh token missing");
-      return thunkApi.rejectWithValue("Refresh token missing");
+      return thunkApi.rejectWithValue("No refresh token found.");
     }
 
-    const { data } = await mongodb.post("auth/refresh");
-    console.log("Response from refresh request:", data); // Перевірте відповідь від сервера
+    console.log("Refresh Token:", refreshToken);
+    setAuthHeader(refreshToken);
 
-    return data.data;
+    const { data } = await mongodb.post("auth/refresh");
+    console.log("Access Token Refreshed:", data);
+
+    // Зберігаємо новий токен в cookies
+    Cookies.set("accessToken", data.data.accessToken, { expires: 1 }); // Зберігаємо токен на 1 день
+    setAuthHeader(data.data.accessToken); // оновлюємо заголовки для запитів
+
+    return data.data; // Повертаємо новий доступний токен
   } catch (error) {
-    console.error("Error in refresh action:", error); // Логування помилки
+    console.log(error);
+
     return thunkApi.rejectWithValue(
       error.response?.data?.message || "Refresh failed"
     );
   }
 });
+
 export const resetUser = createAsyncThunk(
   "resetUser",
   async (credentials, thunkApi) => {

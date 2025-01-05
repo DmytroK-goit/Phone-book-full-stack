@@ -16,25 +16,18 @@ import { selectIsRefreshing } from "./redux/auth/selectors";
 import { LoadingSpinner } from "./components/loader/loader";
 import SendResEmail from "./pages/SendResEmail";
 import ResetPassword from "./pages/ResetPassword";
+import axios from "axios";
 
 function App() {
   const isRefreshing = useSelector(selectIsRefreshing);
   const dispatch = useDispatch();
   useEffect(() => {
-    console.log("useEffect triggered"); // Перевірте, чи цей лог спрацьовує
+    axios.defaults.withCredentials = true;
+  }, []);
+  useEffect(() => {
     const refreshToken = Cookies.get("refreshToken");
-    console.log("Refresh token:", refreshToken); // Перевірте, чи є refreshToken в куках
-
     if (refreshToken) {
-      dispatch(refresh())
-        .then(() => {
-          console.log("Refresh success");
-        })
-        .catch((err) => {
-          console.error("Error refreshing:", err);
-        });
-    } else {
-      console.log("No refresh token found");
+      dispatch(refresh());
     }
   }, [dispatch]);
 
