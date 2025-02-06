@@ -1,0 +1,20 @@
+{
+  "phoneBook": "Phone Book",
+  "home": {
+    "title": "Phone Book {{userName}}'s",
+    "message": "This is your phone book made for you. Enter your login and password or register and use it.",
+    "login": "login and password",
+    "register": "register",
+    "cta": "Let`s GO",
+    "or": "or",
+    "andUse": "and use it.",
+    "altImage": "Home Page Example"
+  },
+  "contactList": "Contact List",
+  "gethome": "Home",
+  "exit": "Exit",
+  "login": "Login",
+  "register": "Register",
+  "logout": "Logout",
+  "welcome": "Welcome, {{userName}}"
+}

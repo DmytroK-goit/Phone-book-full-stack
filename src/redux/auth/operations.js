@@ -72,11 +72,10 @@ export const refresh = createAsyncThunk("refresh", async (_, thunkApi) => {
     const { data } = await mongodb.post("auth/refresh");
     console.log("Access Token Refreshed:", data);
 
-    // Зберігаємо новий токен в cookies
-    Cookies.set("accessToken", data.data.accessToken, { expires: 1 }); // Зберігаємо токен на 1 день
-    setAuthHeader(data.data.accessToken); // оновлюємо заголовки для запитів
+    Cookies.set("accessToken", data.data.accessToken, { expires: 1 });
+    setAuthHeader(data.data.accessToken);
 
-    return data.data; // Повертаємо новий доступний токен
+    return data.data;
   } catch (error) {
     console.log(error);
 

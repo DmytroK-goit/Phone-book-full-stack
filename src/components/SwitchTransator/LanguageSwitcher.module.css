@@ -1,0 +1,25 @@
+.cont {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+select {
+  background-color: transparent;
+  color: white;
+  border: 1px solid white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  outline: none;
+}
+
+select:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+option {
+  background-color: black;
+  color: white;
+}

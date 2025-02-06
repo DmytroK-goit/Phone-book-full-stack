@@ -4,11 +4,16 @@ import { selectIsLoggedIn, selectUserName } from "../redux/auth/selectors";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { slideInFromBot, slideInFromRight } from "../components/motion/motion";
+import { useTranslation } from "react-i18next";
 
 const Home = () => {
   const userName = useSelector(selectUserName);
   const isLoggedIn = useSelector(selectIsLoggedIn);
+  const { t } = useTranslation();
 
+  const capitalizeFirstLetter = (str) => {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  };
   return (
     <div className="relative min-h-screen w-full flex justify-center items-center">
       <motion.img
@@ -43,7 +48,7 @@ const Home = () => {
               transition={{ delay: 3, duration: 2 }}
               className="text-5xl sm:text-7xl md:text-9xl font-bold animate-textColorChange mb-10"
             >
-              {userName}`s Phone Book
+              {t("home.title", { userName: capitalizeFirstLetter(userName) })}
             </motion.h1>
             <motion.div
               initial="hidden"
@@ -54,7 +59,7 @@ const Home = () => {
                 to="/contactlist"
                 className="mt-8 px-20 py-3 w-50 bg-yellow-500 hover:bg-yellow-600 text-black font-bold rounded-full text-lg transition duration-300 ease-in-out transform hover:scale-105"
               >
-                Let`s GO
+                {t("home.cta")}
               </Link>
             </motion.div>
           </div>
