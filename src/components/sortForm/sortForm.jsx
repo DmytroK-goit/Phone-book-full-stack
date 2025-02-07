@@ -4,6 +4,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useDispatch } from "react-redux";
 import { motion } from "framer-motion";
 import { fetchContacts } from "../../redux/contacts/operations";
+import { useTranslation } from "react-i18next";
 
 const slideInFromRight = () => ({
   hidden: { opacity: 0, x: 100 },
@@ -11,8 +12,8 @@ const slideInFromRight = () => ({
 });
 
 const SortForm = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
-
   const handleSubmit = (values) => {
     const { perPage, sortBy, sortOrder } = values;
     dispatch(
@@ -41,9 +42,9 @@ const SortForm = () => {
   });
 
   const initialValues = {
-    perPage: "10", // Дефолтне значення
-    sortBy: "name", // Дефолтне значення
-    sortOrder: "asc", // Дефолтне значення
+    perPage: "10",
+    sortBy: "name",
+    sortOrder: "asc",
   };
 
   return (
@@ -66,14 +67,14 @@ const SortForm = () => {
           }}
         >
           <h3 className="text-xl font-bold text-center py-3 px-5 rounded-lg bg-gradient-to-r from-orange-300 to-yellow-400 text-black shadow-md">
-            Sort Form
+            {t("sortForm.header")}
           </h3>
           <div>
             <label
               className="w-3/4 flex flex-col border-solid border-2 border-black"
               htmlFor={perPageId}
             >
-              Items per Page:
+              {t("sortForm.item")}
               <Field
                 type="text"
                 name="perPage"
@@ -88,7 +89,7 @@ const SortForm = () => {
               className="w-3/4 flex flex-col border-solid border-2 border-black"
               htmlFor={sortId}
             >
-              Sort by:
+              {t("sortForm.sort")}
               <Field as="select" name="sortBy" id={sortId}>
                 <option value="name">Name</option>
                 <option value="phoneNumber">Phone Number</option>
@@ -103,7 +104,7 @@ const SortForm = () => {
               className="w-3/4 flex flex-col border-solid border-2 border-black"
               htmlFor={sortOrderId}
             >
-              Sort order:
+              {t("sortForm.order")}
               <Field as="select" name="sortOrder" id={sortOrderId}>
                 <option value="asc">A-Z</option>
                 <option value="desc">Z-A</option>
@@ -113,10 +114,10 @@ const SortForm = () => {
           </div>
 
           <button
-            className="w-2/3 flex rounded-2xl justify-center text-gray-50 border-black border-solid bg-indigo-700 border-2 border-indigo-600 transition-transform duration-200 hover:scale-110 sm:w-1/3"
+            className="w-1/3 flex rounded-2xl justify-center text-gray-50 border-black border-solid bg-indigo-700 border-2 border-indigo-600 transition-transform duration-200 hover:scale-110 sm:w-2/3"
             type="submit"
           >
-            Sort
+            {t("sortForm.btn")}
           </button>
         </Form>
       </Formik>

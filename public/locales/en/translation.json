@@ -23,6 +23,32 @@
   "logout": "Logout",
   "welcome": "Welcome, {{userName}}",
   "loginPage": {
-    "login": "Login now!"
-  }
+    "login": "Login now!",
+    "email": "email",
+    "pass": "password",
+    "click": "If you don`t have an account, click Sign up",
+    "reg": "Sign up",
+    "forgot": "Forgot password",
+    "logBtn": "Login",
+    "name": "name",
+    "signUP": "Sign up now!"
+  },
+  "contactForm": {
+    "header": "Contact Form",
+    "selectType": "Select contact type",
+    "btn": "Add contact"
+  },
+  "searchForm": {
+    "header": "Search form",
+    "findName": "Find contacts by name",
+    "findPhone": "Find contacts by number"
+  },
+  "sortForm": {
+    "header": "Sort Form",
+    "item": "Items per Page:",
+    "sort": "Sort by:",
+    "order": "Sort order:",
+    "btn": "Sort"
+  },
+  "contactsList": "Contacts List: {{count}} contacts (Page {{currentPage}} of {{totalPages}})"
 }

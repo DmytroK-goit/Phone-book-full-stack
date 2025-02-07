@@ -5,9 +5,11 @@ import { useDispatch } from "react-redux";
 import { motion } from "framer-motion";
 import { slideInFromRight } from "../motion/motion";
 import { addContact } from "../../redux/contacts/operations";
+import { useTranslation } from "react-i18next";
 
 const ContactForm = () => {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const handleSubmit = (values, { resetForm }) => {
     console.log("Submitting values:", values);
@@ -88,13 +90,13 @@ const ContactForm = () => {
           <Form
             className="w-full p-5 sm:p-10 flex gap-8 flex-col bg-amber-500 rounded-2xl mb-10 border-solid border-2 border-black"
             style={{
-              boxShadow: "15px 15px 10px rgba(255, 223, 186, 0.8)", // Тінь для світлого вигляду
-              backgroundImage: "linear-gradient(to right, #fceabb, #f8b500)", // Світлий градієнт
-              color: "black", // Темний текст для контрасту
+              boxShadow: "15px 15px 10px rgba(255, 223, 186, 0.8)",
+              backgroundImage: "linear-gradient(to right, #fceabb, #f8b500)",
+              color: "black",
             }}
           >
             <h3 className="text-xl font-bold text-center py-3 px-5 rounded-lg bg-gradient-to-r from-orange-300 to-yellow-400 text-black shadow-md">
-              Contact Form
+              {t("contactForm.header")}
             </h3>
             <div>
               <label
@@ -145,7 +147,7 @@ const ContactForm = () => {
               >
                 <Field as="select" name="contactType" id={contactTypeId}>
                   <option value="" disabled>
-                    Select contact type
+                    {t("contactForm.selectType")}
                   </option>
                   <option value="work">Work</option>
                   <option value="home">Home</option>
@@ -175,7 +177,7 @@ const ContactForm = () => {
               className="w-2/3 flex rounded-2xl justify-center text-gray-50 border-black border-solid bg-indigo-700 border-2 border-indigo-600  transition-transform duration-200 hover:scale-110 sm:w-1/3"
               type="submit"
             >
-              Add contact
+              {t("contactForm.btn")}
             </button>
           </Form>
         )}

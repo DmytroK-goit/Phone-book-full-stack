@@ -1,0 +1,54 @@
+{
+  "phoneBook": "Annuaire téléphonique",
+  "home": {
+    "title": "Annuaire téléphonique de {{userName}}",
+    "message": "C'est votre annuaire téléphonique conçu pour vous. Entrez votre identifiant et votre mot de passe ou inscrivez-vous et utilisez-le.",
+    "login": "identifiant et mot de passe",
+    "register": "inscription",
+    "cta": "Commençons",
+    "or": "ou",
+    "andUse": "et utilisez-le.",
+    "altImage": "Exemple de page d'accueil",
+    "hero": "C'est votre annuaire téléphonique conçu pour vous. Entrez votre",
+    "heroLogin": "identifiant et mot de passe",
+    "heroOr": "ou",
+    "heroRegister": "inscrivez-vous",
+    "heroUse": "et utilisez cette application"
+  },
+  "contactList": "Liste de contacts",
+  "gethome": "Accueil",
+  "exit": "Sortie",
+  "login": "Connexion",
+  "register": "Inscription",
+  "logout": "Déconnexion",
+  "welcome": "Bienvenue, {{userName}}",
+  "loginPage": {
+    "login": "Connectez-vous maintenant!",
+    "email": "E-mail",
+    "pass": "Mot de passe",
+    "click": "Si vous n'avez pas de compte, cliquez sur « S'inscrire ».",
+    "reg": "S'inscrire",
+    "forgot": "Mot de passe oublié",
+    "logBtn": "Se connecter",
+    "name": "Nom",
+    "signUP": "Inscrivez-vous maintenant!"
+  },
+  "contactForm": {
+    "header": "Formulaire de contact",
+    "selectType": "Choisissez le type de contact",
+    "btn": "Ajouter un contact"
+  },
+  "searchForm": {
+    "header": "Formulaire de recherche",
+    "findName": "Rechercher des contacts par nom",
+    "findPhone": "Rechercher des contacts par téléphone"
+  },
+  "sortForm": {
+    "header": "Formulaire de tri",
+    "item": "Éléments par page",
+    "sort": "Trier par :",
+    "order": "Ordre de tri :",
+    "btn": "Trier"
+  },
+  "contactsList": "Liste de contacts : {{count}} contacts (Page {{currentPage}} sur {{totalPages}})"
+}

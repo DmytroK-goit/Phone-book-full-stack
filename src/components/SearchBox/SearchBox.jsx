@@ -8,8 +8,10 @@ import {
   selectNumberFilter,
 } from "../../redux/filters/selectors";
 import { changeFilter, changeFilterNumber } from "../../redux/filters/slice";
+import { useTranslation } from "react-i18next";
 
 const SearchBox = () => {
+  const { t } = useTranslation();
   const searchIdName = useId();
   const searchIdNumber = useId();
   const dispatch = useDispatch();
@@ -31,10 +33,10 @@ const SearchBox = () => {
         }}
       >
         <h3 className="text-xl font-bold text-center py-3 px-5 rounded-lg bg-gradient-to-r from-orange-300 to-yellow-400 text-black shadow-md">
-          Search form
+          {t("searchForm.header")}
         </h3>
         <label className="w-3/4 flex flex-col " htmlFor={searchIdName}>
-          Find contacts by name
+          {t("searchForm.findName")}
           <input
             className="border-solid border-2 border-black"
             type="text"
@@ -45,7 +47,7 @@ const SearchBox = () => {
           />
         </label>
         <label className="w-3/4 flex flex-col " htmlFor={searchIdNumber}>
-          Find contacts by number
+          {t("searchForm.findPhone")}
           <input
             className="border-solid border-2 border-black"
             type="text"
