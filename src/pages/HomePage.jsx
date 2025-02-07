@@ -65,21 +65,21 @@ const Home = () => {
           </div>
         ) : (
           <h2 className="text-xl font-bold text-yellow-400 lg:text-5xl mb-4 text-center font-light">
-            This is your phone book made for you. Enter your{" "}
+            {t("home.hero")}{" "}
             <Link
               to="/login"
               className="text-blue-500 hover:text-blue-600 underline underline-offset-2"
             >
-              login and password{" "}
+              {t("home.heroLogin")}{" "}
             </Link>
-            or{" "}
+            {t("home.heroOr")}{" "}
             <Link
               to="/register"
               className="text-blue-500 hover:text-blue-600 underline underline-offset-2"
             >
-              register
+              {t("home.heroRegister")}
             </Link>{" "}
-            and use it.
+            {t("home.heroUse")}
           </h2>
         )}
       </motion.div>

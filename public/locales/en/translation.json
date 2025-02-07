@@ -8,7 +8,12 @@
     "cta": "Let`s GO",
     "or": "or",
     "andUse": "and use it.",
-    "altImage": "Home Page Example"
+    "altImage": "Home Page Example",
+    "hero": "This is your phone book made for you. Enter your",
+    "heroLogin": "login and password",
+    "heroOr": "or",
+    "heroRegister": "register",
+    "heroUse": "and use this application."
   },
   "contactList": "Contact List",
   "gethome": "Home",
@@ -16,5 +21,8 @@
   "login": "Login",
   "register": "Register",
   "logout": "Logout",
-  "welcome": "Welcome, {{userName}}"
+  "welcome": "Welcome, {{userName}}",
+  "loginPage": {
+    "login": "Login now!"
+  }
 }
