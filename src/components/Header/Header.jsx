@@ -14,7 +14,6 @@ const Header = () => {
     return clsx(s.link, isActive && s.activeLink);
   };
   const dispatch = useDispatch();
-
   const userName = useSelector(selectUserName);
   const isLoggedIn = useSelector(selectIsLoggedIn);
 

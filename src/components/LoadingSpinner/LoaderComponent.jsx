@@ -5,8 +5,8 @@ const LoaderComponent = () => (
   <div className={css.loaderContainer}>
     <DNA
       visible={true}
-      height="80"
-      width="80"
+      height="280"
+      width="280"
       ariaLabel="dna-loading"
       wrapperStyle={{}}
       wrapperClass="dna-wrapper"

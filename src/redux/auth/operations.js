@@ -58,7 +58,7 @@ export const login = createAsyncThunk(
   async (credentials, thunkApi) => {
     try {
       const { data } = await mongodb.post("auth/login", credentials);
-      toast.success("Success");
+      // toast.success("Success");
       setAuthHeader(data.data.accessToken);
       return data;
     } catch (error) {
@@ -83,9 +83,7 @@ export const refresh = createAsyncThunk("refresh", async (_, thunkApi) => {
     if (!refreshToken) {
       return thunkApi.rejectWithValue("No refresh token found.");
     }
-
     const { data } = await mongodb.post("auth/refresh");
-
     Cookies.set("accessToken", data.data.accessToken, { expires: 1 });
     setAuthHeader(data.data.accessToken);
     return data.data;

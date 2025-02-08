@@ -30,7 +30,8 @@ const Home = () => {
         transition={{
           duration: 1,
         }}
-        src="https://www.comreg.ie/media/2019/05/Printed-Directories-Image-1024x683.jpg"
+        // src="https://www.comreg.ie/media/2019/05/Printed-Directories-Image-1024x683.jpg"
+        src="https://img.freepik.com/premium-photo/smartphone-office-desk-wooden-background-copy-space_124437-77.jpg?w=826"
         alt="Home Page Example"
         className="absolute inset-0 w-full h-full object-cover z-0"
       />
