@@ -8,6 +8,7 @@ export const goitApi = axios.create({
 });
 export const mongodb = axios.create({
   baseURL: "https://nodejs-hw-mongodb-2hns.onrender.com",
+  withCredentials: true,
 });
 
 const setAuthHeader = (token) => {
@@ -17,7 +18,25 @@ const setAuthHeader = (token) => {
     delete mongodb.defaults.headers.common.Authorization;
   }
 };
-axios.defaults.withCredentials = true;
+
+mongodb.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    if (error.response && error.response.status === 401) {
+      localStorage.clear();
+      setAuthHeader(null);
+      window.location.href = "/login";
+    }
+    return Promise.reject(error);
+  }
+);
+axios.interceptors.request.use((config) => {
+  const token = store.getState().auth.token;
+  if (token) {
+    config.headers["Authorization"] = `Bearer ${token}`;
+  }
+  return config;
+});
 
 export const register = createAsyncThunk(
   "register",
@@ -61,24 +80,16 @@ export const logout = createAsyncThunk("logout", async (_, thunkApi) => {
 export const refresh = createAsyncThunk("refresh", async (_, thunkApi) => {
   try {
     const refreshToken = Cookies.get("refreshToken");
-
     if (!refreshToken) {
       return thunkApi.rejectWithValue("No refresh token found.");
     }
 
-    console.log("Refresh Token:", refreshToken);
-    setAuthHeader(refreshToken);
-
     const { data } = await mongodb.post("auth/refresh");
-    console.log("Access Token Refreshed:", data);
 
     Cookies.set("accessToken", data.data.accessToken, { expires: 1 });
     setAuthHeader(data.data.accessToken);
-
     return data.data;
   } catch (error) {
-    console.log(error);
-
     return thunkApi.rejectWithValue(
       error.response?.data?.message || "Refresh failed"
     );

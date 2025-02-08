@@ -15,6 +15,18 @@ const initialState = {
 const slice = createSlice({
   name: "auth",
   initialState,
+  reducers: {
+    setUser: (state, action) => {
+      state.user = action.payload.user;
+      state.token = action.payload.token;
+      state.isLoggedIn = true;
+    },
+    logout: (state) => {
+      state.user = { name: "", email: "" };
+      state.token = "";
+      state.isLoggedIn = false;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(register.fulfilled, (state, action) => {
@@ -53,8 +65,11 @@ const slice = createSlice({
       })
       .addCase(refresh.rejected, (state) => {
         state.isRefreshing = false;
+        state.isLoggedIn = false;
+        state.isLoading = false;
       });
   },
 });
 
+export const { setUser } = slice.actions;
 export const authSlice = slice.reducer;

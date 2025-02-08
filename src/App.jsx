@@ -10,31 +10,13 @@ import { PrivateRoute } from "./components/PrivateRoute";
 import { RestrictedRoute } from "./components/RestrictedRoute";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { refresh } from "./redux/auth/operations";
 import { AnimatePresence } from "framer-motion";
-import { selectIsRefreshing } from "./redux/auth/selectors";
 import SendResEmail from "./pages/SendResEmail";
 import ResetPassword from "./pages/ResetPassword";
-import axios from "axios";
-import LoaderComponent from "./components/LoadingSpinner/LoaderComponent";
+import { setUser } from "./redux/auth/slice";
+import { selectToken } from "./redux/auth/selectors";
 
 function App() {
-  const isRefreshing = useSelector(selectIsRefreshing);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    axios.defaults.withCredentials = true;
-  }, []);
-  useEffect(() => {
-    const refreshToken = Cookies.get("refreshToken");
-    if (refreshToken) {
-      dispatch(refresh());
-    }
-  }, [dispatch]);
-
-  if (isRefreshing) {
-    return <LoaderComponent />;
-  }
-
   return (
     <AnimatePresence>
       <Routes>

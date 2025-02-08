@@ -9,6 +9,8 @@ export const fetchContacts = createAsyncThunk(
     thunkApi
   ) => {
     try {
+      const token = thunkApi.getState().auth.token;
+
       const {
         data: { data },
       } = await mongodb.get("/contacts", {
@@ -17,6 +19,9 @@ export const fetchContacts = createAsyncThunk(
           perPage,
           sortBy,
           sortOrder,
+        },
+        headers: {
+          Authorization: token ? `Bearer ${token}` : "",
         },
       });
 
@@ -34,11 +39,17 @@ export const fetchContacts = createAsyncThunk(
     }
   }
 );
+
 export const deleteContact = createAsyncThunk(
   "deleteContact",
   async (_id, thunkApi) => {
     try {
-      const { data } = await mongodb.delete(`/contacts/${_id}`);
+      const token = thunkApi.getState().auth.token;
+      const { data } = await mongodb.delete(`/contacts/${_id}`, {
+        headers: {
+          Authorization: token ? `Bearer ${token}` : "",
+        },
+      });
 
       if (data) {
         toast.success(`Контакт видалено`);
@@ -50,13 +61,16 @@ export const deleteContact = createAsyncThunk(
     }
   }
 );
+
 export const editContact = createAsyncThunk(
   "contacts/editContact",
   async ({ _id, updatedData }, thunkApi) => {
     try {
+      const token = thunkApi.getState().auth.token;
       const { data } = await mongodb.patch(`/contacts/${_id}`, updatedData, {
         headers: {
           "Content-Type": "multipart/form-data",
+          Authorization: token ? `Bearer ${token}` : "",
         },
       });
 
@@ -76,11 +90,11 @@ export const addContact = createAsyncThunk(
   "addContact",
   async (body, thunkApi) => {
     try {
-      console.log("Data being sent to API:", body);
-
+      const token = thunkApi.getState().auth.token;
       const { data } = await mongodb.post("/contacts", body, {
         headers: {
           "Content-Type": "multipart/form-data",
+          Authorization: token ? `Bearer ${token}` : "",
         },
       });
       if (data) {

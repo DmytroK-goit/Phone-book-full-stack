@@ -15,10 +15,10 @@ import {
 import storage from "redux-persist/lib/storage";
 
 const persistConfig = {
-  key: "root-auth",
+  key: "root",
   version: 1,
   storage,
-  whitelist: ["token"], // ✅
+  whitelist: ["token", "isLoggedIn", "user"],
 };
 
 export const store = configureStore({
