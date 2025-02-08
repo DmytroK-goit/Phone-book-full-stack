@@ -12,7 +12,6 @@ const ContactForm = () => {
   const { t } = useTranslation();
 
   const handleSubmit = (values, { resetForm }) => {
-    console.log("Submitting values:", values);
     dispatch(
       addContact({
         name: values.name,
@@ -55,7 +54,7 @@ const ContactForm = () => {
       .test(
         "fileSize",
         "Файл занадто великий",
-        (value) => !value || (value && value.size <= 5 * 1024 * 1024) // <= 5MB
+        (value) => !value || (value && value.size <= 5 * 1024 * 1024)
       )
       .test(
         "fileType",
@@ -149,9 +148,9 @@ const ContactForm = () => {
                   <option value="" disabled>
                     {t("contactForm.selectType")}
                   </option>
-                  <option value="work">Work</option>
-                  <option value="home">Home</option>
-                  <option value="personal">Personal</option>
+                  <option value="work"> {t("contactForm.work")}</option>
+                  <option value="home"> {t("contactForm.home")}</option>
+                  <option value="personal"> {t("contactForm.pers")}</option>
                 </Field>
                 <ErrorMessage name="contactType" component="span" />
               </label>

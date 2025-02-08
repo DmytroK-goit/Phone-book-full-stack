@@ -4,13 +4,14 @@ import { TfiEmail } from "react-icons/tfi";
 import { RxAvatar } from "react-icons/rx";
 import { useDispatch } from "react-redux";
 import { motion } from "framer-motion";
-
 import PropTypes from "prop-types";
 import { deleteContact } from "../../redux/contacts/operations";
 import { useState } from "react";
 import EditContactModal from "../EditContactModal/EditContactModal";
+import { useTranslation } from "react-i18next";
 
 const Contact = ({ contact }) => {
+  const { t } = useTranslation();
   const { _id, name, phoneNumber, email, contactType, photo } = contact;
   const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -64,14 +65,14 @@ const Contact = ({ contact }) => {
           type="button"
           onClick={handleDelete}
         >
-          Delete
+          {t("contact.del")}
         </button>
         <button
           className="w-1/3 rounded-full bg-green-500 text-white p-3 md:p-4 lg:p-5 hover:bg-green-700 transition-colors duration-200"
           type="button"
           onClick={handleEdit}
         >
-          Edit
+          {t("contact.edit")}
         </button>
       </div>
 

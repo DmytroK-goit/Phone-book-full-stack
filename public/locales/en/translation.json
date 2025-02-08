@@ -36,6 +36,9 @@
   "contactForm": {
     "header": "Contact Form",
     "selectType": "Select contact type",
+    "work": "Work",
+    "home": "Home",
+    "pers": "Personal",
     "btn": "Add contact"
   },
   "searchForm": {
@@ -50,5 +53,19 @@
     "order": "Sort order:",
     "btn": "Sort"
   },
-  "contactsList": "Contacts List: {{count}} contacts (Page {{currentPage}} of {{totalPages}})"
+  "contactsList": "Contacts List: {{count}} contacts (Page {{currentPage}} of {{totalPages}})",
+  "contact": {
+    "del": "Delete",
+    "edit": "Edit"
+  },
+  "footer": {
+    "phoneBook": "Phone Book",
+    "country": "Ukraine",
+    "city": "Vinnytsia",
+    "owner": "Contact Owner",
+    "email": "Email:",
+    "phone": "Phone:",
+    "social": "Socials:",
+    "database": "Database information:"
+  }
 }

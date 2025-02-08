@@ -36,6 +36,9 @@
   "contactForm": {
     "header": "Formulaire de contact",
     "selectType": "Choisissez le type de contact",
+    "work": "Professionnel",
+    "home": "Domicile",
+    "pers": "Personnel",
     "btn": "Ajouter un contact"
   },
   "searchForm": {
@@ -50,5 +53,19 @@
     "order": "Ordre de tri :",
     "btn": "Trier"
   },
-  "contactsList": "Liste de contacts : {{count}} contacts (Page {{currentPage}} sur {{totalPages}})"
+  "contactsList": "Liste de contacts : {{count}} contacts (Page {{currentPage}} sur {{totalPages}})",
+  "contact": {
+    "del": "Supprimer",
+    "edit": "Modifier"
+  },
+  "footer": {
+    "phoneBook": "Annuaire",
+    "country": "Ukraine",
+    "city": "Vinnytsia",
+    "owner": "Propriétaire du contact",
+    "email": "Email :",
+    "phone": "Téléphone :",
+    "social": "Réseaux sociaux :",
+    "database": "Informations sur la base de données :"
+  }
 }
