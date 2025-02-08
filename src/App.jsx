@@ -13,10 +13,10 @@ import { useEffect } from "react";
 import { refresh } from "./redux/auth/operations";
 import { AnimatePresence } from "framer-motion";
 import { selectIsRefreshing } from "./redux/auth/selectors";
-import { LoadingSpinner } from "./components/loader/loader";
 import SendResEmail from "./pages/SendResEmail";
 import ResetPassword from "./pages/ResetPassword";
 import axios from "axios";
+import LoaderComponent from "./components/LoadingSpinner/LoaderComponent";
 
 function App() {
   const isRefreshing = useSelector(selectIsRefreshing);
@@ -32,7 +32,7 @@ function App() {
   }, [dispatch]);
 
   if (isRefreshing) {
-    return <LoadingSpinner />;
+    return <LoaderComponent />;
   }
 
   return (

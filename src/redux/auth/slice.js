@@ -7,6 +7,7 @@ const initialState = {
     email: "",
   },
   token: "",
+  isLoading: false,
   isLoggedIn: false,
   isRefreshing: false,
 };
@@ -21,10 +22,14 @@ const slice = createSlice({
         state.token = action.payload.accessToken;
         state.isLoggedIn = true;
       })
+      .addCase(login.pending, (state, action) => {
+        state.isLoading = true;
+      })
       .addCase(login.fulfilled, (state, action) => {
         const { userName, accessToken } = action.payload.data;
         state.user = { ...state.user, name: userName };
         state.token = accessToken;
+        state.isLoading = false;
         state.isLoggedIn = true;
       })
       .addCase(logout.fulfilled, (state) => {
@@ -32,11 +37,15 @@ const slice = createSlice({
         state.token = null;
         state.isLoggedIn = false;
       })
+      .addCase(refresh.pending, (state) => {
+        state.isLoading = true;
+      })
       .addCase(refresh.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.token = action.payload.accessToken;
         state.isLoggedIn = true;
         state.isRefreshing = false;
+        state.isLoading = false;
       })
       .addCase(resetPwd.fulfilled, (state, action) => {
         state.token = action.payload.accessToken;

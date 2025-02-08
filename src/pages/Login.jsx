@@ -1,5 +1,5 @@
 import { Field, Form, Formik } from "formik";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { login } from "../redux/auth/operations";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
@@ -7,8 +7,12 @@ import { motion } from "framer-motion";
 import { slideInFromLeft, slideInFromRight } from "../components/motion/motion";
 import { useTranslation } from "react-i18next";
 import Header from "../components/Header/Header";
+import { selectIsLoading } from "../redux/auth/selectors";
+import LoaderComponent from "../components/LoadingSpinner/LoaderComponent";
 
 const Login = () => {
+  const loading = useSelector(selectIsLoading);
+
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -28,7 +32,9 @@ const Login = () => {
       });
     options.resetForm();
   };
-
+  if (loading) {
+    return <LoaderComponent />;
+  }
   return (
     <>
       <Header />
