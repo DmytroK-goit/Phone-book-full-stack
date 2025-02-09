@@ -55,7 +55,7 @@ const ResetPassword = () => {
             variants={slideInFromRight()}
             className="text-5xl font-bold"
           >
-            Reset Password
+            {t("resPwd.reset")}
           </motion.h1>
         </div>
         <motion.div
