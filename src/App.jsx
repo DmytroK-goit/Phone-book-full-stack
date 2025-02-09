@@ -1,5 +1,4 @@
 import { Route, Routes } from "react-router-dom";
-import Cookies from "js-cookie";
 import ContactList from "./components/ContactList/ContactList";
 import Layout from "./components/Layout";
 import Home from "./pages/HomePage";
@@ -8,13 +7,9 @@ import Register from "./pages/Register";
 import NotFound from "./pages/NotFound";
 import { PrivateRoute } from "./components/PrivateRoute";
 import { RestrictedRoute } from "./components/RestrictedRoute";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
 import SendResEmail from "./pages/SendResEmail";
 import ResetPassword from "./pages/ResetPassword";
-import { setUser } from "./redux/auth/slice";
-import { selectToken } from "./redux/auth/selectors";
 
 function App() {
   return (
@@ -33,24 +28,27 @@ function App() {
             element={<RestrictedRoute component={<SendResEmail />} />}
           />
           <Route path="auth/reset-pwd" element={<ResetPassword />} />
-        </Route>
-        <Route
-          path="login"
-          element={
-            <RestrictedRoute component={<Login />} redirectTo="/contactlist" />
-          }
-        />
-        <Route
-          path="register"
-          element={
-            <RestrictedRoute
-              component={<Register />}
-              redirectTo="/contactlist"
-            />
-          }
-        />
+          <Route
+            path="login"
+            element={
+              <RestrictedRoute
+                component={<Login />}
+                redirectTo="/contactlist"
+              />
+            }
+          />
+          <Route
+            path="register"
+            element={
+              <RestrictedRoute
+                component={<Register />}
+                redirectTo="/contactlist"
+              />
+            }
+          />
 
-        <Route path="*" element={<NotFound />} />
+          <Route path="*" element={<NotFound />} />
+        </Route>
       </Routes>
     </AnimatePresence>
   );

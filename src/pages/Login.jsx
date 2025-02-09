@@ -37,7 +37,7 @@ const Login = () => {
   }
   return (
     <>
-      <Header />
+     
       <div className="hero min-h-screen bg-inherit">
         <div className="hero-content flex-col lg:flex-row-reverse">
           <div className="text-center lg:text-left">

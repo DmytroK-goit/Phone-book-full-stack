@@ -1,7 +1,10 @@
 const NotFound = () => {
   return (
-    <div className='min-h-screen flex justify-center items-center '>
-      <img src='https://www.artzstudio.com/content/images/wordpress/2020/05/404-error-not-found-page-lost.png' width={1000} />
+    <div className="min-h-screen flex justify-center items-center w-screen">
+      <img
+        className="w-full"
+        src="https://internetdevels.com/sites/default/files/public/blog_preview/404_page_cover.jpg"
+      />
     </div>
   );
 };

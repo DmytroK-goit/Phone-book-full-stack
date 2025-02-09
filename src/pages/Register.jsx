@@ -19,7 +19,6 @@ const Register = () => {
   };
   return (
     <>
-      <Header />
       <div className="hero bg-inherit	min-h-screen">
         <div className="hero-content flex-col lg:flex-row-reverse">
           <div className="text-center lg:text-left">
