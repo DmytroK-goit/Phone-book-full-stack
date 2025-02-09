@@ -45,10 +45,10 @@ const ContactList = () => {
 
   return (
     <div className="p-5">
-      <div className="flex flex-col sm:flex-row sm:space-x-20">
-        <ContactForm className="w-1/3 sm:w-1/2 lg:w-1/3" />
-        <SearchBox className="w-full sm:w-1/2 lg:w-1/3" />
-        <SortForm className="w-full sm:w-1/2 lg:w-1/3" />
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 p-4">
+        <ContactForm className="w-3/4 sm:w-1/2 lg:w-2/3" />
+        <SearchBox className="w-3/4 sm:w-1/2 lg:w-2/3" />
+        <SortForm className="w-3/4 sm:w-1/2 lg:w-2/3" />
       </div>
 
       <motion.h2

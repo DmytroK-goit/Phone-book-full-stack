@@ -21,13 +21,20 @@ const Header = () => {
     return str.charAt(0).toUpperCase() + str.slice(1);
   };
   return (
-    <div className="flex bg-gradient-to-r from-gray-900 via-gray-700 to-black text-white	p-5 justify-between items-center flex-col	sm:flex-row ">
+    <div className="flex bg-gradient-to-r from-gray-900 via-gray-500 to-black text-white p-5 justify-between items-center flex-col sm:flex-row">
       <motion.div
-        whileHover={{ scale: 1.2 }}
-        transition={{ duration: 0.2 }}
-        className="text-lime-300	decoration-slate-300	underline text-sm sm:text-base items-center lg:text-4xl animate__animated animate__flip"
+        whileHover={{
+          color: "#84cc16",
+        }}
+        transition={{
+          duration: 0.2,
+          ease: "easeOut",
+        }}
+        className="text-slate-300 decoration-slate-300 underline text-sm sm:text-base items-center lg:text-4xl animate__animated animate__flip p-2 rounded-lg shadow-lg hover:shadow-xl"
       >
-        <Link to="/">{t("phoneBook")}</Link>
+        <Link to="/" className="font-semibold hover:text-lime-400 duration-300">
+          {t("phoneBook")}
+        </Link>
       </motion.div>
       {isLoggedIn && (
         <motion.div
