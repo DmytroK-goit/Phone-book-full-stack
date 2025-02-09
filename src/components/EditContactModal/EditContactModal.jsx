@@ -5,7 +5,6 @@ import { useState, useEffect } from "react";
 import { editContact } from "../../redux/contacts/operations";
 
 const EditContactModal = ({ contact, onClose }) => {
-  console.log(contact);
   const dispatch = useDispatch();
   const [selectedFile, setSelectedFile] = useState(null);
 
@@ -14,7 +13,6 @@ const EditContactModal = ({ contact, onClose }) => {
     phoneNumber: contact.phoneNumber || "",
     email: contact.email || "",
     contactType: contact.contactType || "",
-    photo: null,
   };
 
   useEffect(() => {
@@ -26,24 +24,15 @@ const EditContactModal = ({ contact, onClose }) => {
     setSelectedFile(file);
     setFieldValue("photo", file);
   };
-
   const handleSubmit = (values) => {
     const formData = new FormData();
 
     Object.entries(values).forEach(([key, value]) => {
-      if (key === "photo") {
-        if (selectedFile) {
-          formData.append("photo", selectedFile);
-        } else {
-          formData.append("photo", contact.photo);
-        }
+      if (key === "photo" && selectedFile) {
+        formData.append("photo", selectedFile);
       } else if (key !== "email") {
         formData.append(key, value);
       }
-    });
-
-    formData.forEach((value, key) => {
-      console.log(key, value);
     });
 
     dispatch(editContact({ _id: contact._id, updatedData: formData }));
