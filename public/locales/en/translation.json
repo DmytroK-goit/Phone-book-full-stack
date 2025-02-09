@@ -67,5 +67,16 @@
     "phone": "Phone:",
     "social": "Socials:",
     "database": "Database information:"
+  },
+  "sendResetPwd": {
+    "hero": "Send reset password",
+    "email": "Email",
+    "sendBtn": "Send"
+  },
+  "resPwd": {
+    "newPwd": "New Password",
+    "confPwd": "Confirm Password",
+    "resetting": "Resetting...",
+    "reset": "Reset Password"
   }
 }

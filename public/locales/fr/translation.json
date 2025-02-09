@@ -67,5 +67,16 @@
     "phone": "Téléphone :",
     "social": "Réseaux sociaux :",
     "database": "Informations sur la base de données :"
+  },
+  "sendResetPwd": {
+    "hero": "Envoyer la réinitialisation du mot de passe",
+    "email": "E-mail",
+    "sendBtn": "Envoyer"
+  },
+  "resPwd": {
+    "newPwd": "Nouveau mot de passe",
+    "confPwd": "Confirmer le mot de passe",
+    "resetting": "Réinitialisation...",
+    "reset": "Réinitialiser le mot de passe"
   }
 }

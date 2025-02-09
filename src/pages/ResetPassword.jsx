@@ -6,8 +6,10 @@ import toast from "react-hot-toast";
 import { motion } from "framer-motion";
 import { slideInFromLeft, slideInFromRight } from "../components/motion/motion";
 import * as Yup from "yup";
+import { useTranslation } from "react-i18next";
 
 const ResetPassword = () => {
+  const { t } = useTranslation();
   const [searchParams] = useSearchParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -71,7 +73,7 @@ const ResetPassword = () => {
               <Form className="card-body">
                 <div className="form-control">
                   <label className="label">
-                    <span className="label-text">New Password</span>
+                    <span className="label-text">{t("resPwd.newPwd")}</span>
                   </label>
                   <Field
                     name="newPassword"
@@ -82,7 +84,7 @@ const ResetPassword = () => {
                 </div>
                 <div className="form-control">
                   <label className="label">
-                    <span className="label-text">Confirm Password</span>
+                    <span className="label-text">{t("resPwd.confPwd")}</span>
                   </label>
                   <Field
                     name="confirmPassword"
@@ -97,7 +99,7 @@ const ResetPassword = () => {
                     className="btn btn-primary"
                     disabled={isSubmitting}
                   >
-                    {isSubmitting ? "Resetting..." : "Reset Password"}
+                    {isSubmitting ? t("resPwd.resetting") : t("resPwd.reset")}
                   </button>
                 </div>
               </Form>
