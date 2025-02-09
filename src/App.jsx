@@ -28,6 +28,11 @@ function App() {
               <PrivateRoute component={<ContactList />} redirectTo="/login" />
             }
           />
+          <Route
+            path="send-reset-email"
+            element={<RestrictedRoute component={<SendResEmail />} />}
+          />
+          <Route path="auth/reset-pwd" element={<ResetPassword />} />
         </Route>
         <Route
           path="login"
@@ -44,11 +49,7 @@ function App() {
             />
           }
         />
-        <Route
-          path="send-reset-email"
-          element={<RestrictedRoute component={<SendResEmail />} />}
-        />
-        <Route path="auth/reset-pwd" element={<ResetPassword />} />
+
         <Route path="*" element={<NotFound />} />
       </Routes>
     </AnimatePresence>
