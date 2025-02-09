@@ -21,6 +21,7 @@ const ContactForm = () => {
         photo: values.photo,
       })
     );
+    console.log(values);
     resetForm();
   };
 

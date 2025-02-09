@@ -61,14 +61,14 @@ const Contact = ({ contact }) => {
       </div>
       <div className="flex justify-between">
         <button
-          className="w-1/3 rounded-full bg-red-500 text-white p-3 md:p-4 lg:p-5 hover:bg-red-600 transition-colors duration-200"
+          className="w-1/3 rounded-full bg-red-500 text-white p-3 md:p-4 lg:p-5 hover:bg-red-600 transition-colors duration-200 min-w-[120px]"
           type="button"
           onClick={handleDelete}
         >
           {t("contact.del")}
         </button>
         <button
-          className="w-1/3 rounded-full bg-green-500 text-white p-3 md:p-4 lg:p-5 hover:bg-green-700 transition-colors duration-200"
+          className="inline-flex items-center justify-center rounded-full bg-green-500 text-white p-3 md:p-4 lg:p-5 hover:bg-green-700 transition-colors duration-200 min-w-[120px]"
           type="button"
           onClick={handleEdit}
         >

@@ -1,0 +1,82 @@
+{
+  "phoneBook": "Telefonbuch",
+  "home": {
+    "title": "Telefonbuch von {{userName}}",
+    "message": "Dies ist dein Telefonbuch, das für dich gemacht wurde. Gib deine Login- und Passwort-Daten ein oder registriere dich und nutze es.",
+    "login": "Login und Passwort",
+    "register": "Registrieren",
+    "cta": "Los geht's",
+    "or": "oder",
+    "andUse": "und benutze es.",
+    "altImage": "Beispiel für die Startseite",
+    "hero": "Dies ist dein Telefonbuch, das für dich gemacht wurde. Gib dein",
+    "heroLogin": "Login und Passwort",
+    "heroOr": "oder",
+    "heroRegister": "registriere dich",
+    "heroUse": "und benutze diese Anwendung."
+  },
+  "contactList": "Kontaktliste",
+  "gethome": "Startseite",
+  "exit": "Ausloggen",
+  "login": "Login",
+  "register": "Registrieren",
+  "logout": "Abmelden",
+  "welcome": "Willkommen, {{userName}}",
+  "loginPage": {
+    "login": "Jetzt einloggen!",
+    "email": "E-Mail",
+    "pass": "Passwort",
+    "click": "Wenn du kein Konto hast, klicke auf Anmelden",
+    "reg": "Anmelden",
+    "forgot": "Passwort vergessen",
+    "logBtn": "Login",
+    "name": "Name",
+    "signUP": "Jetzt anmelden!"
+  },
+  "contactForm": {
+    "header": "Kontaktformular",
+    "selectType": "Kontakttyp wählen",
+    "work": "Arbeit",
+    "home": "Zuhause",
+    "pers": "Persönlich",
+    "btn": "Kontakt hinzufügen"
+  },
+  "searchForm": {
+    "header": "Suchformular",
+    "findName": "Kontakte nach Namen suchen",
+    "findPhone": "Kontakte nach Nummer suchen"
+  },
+  "sortForm": {
+    "header": "Sortierformular",
+    "item": "Elemente pro Seite:",
+    "sort": "Sortieren nach:",
+    "order": "Sortierreihenfolge:",
+    "btn": "Sortieren"
+  },
+  "contactsList": "Kontakte Liste: {{count}} Kontakte (Seite {{currentPage}} von {{totalPages}})",
+  "contact": {
+    "del": "Löschen",
+    "edit": "Bearbeiten"
+  },
+  "footer": {
+    "phoneBook": "Telefonbuch",
+    "country": "Ukraine",
+    "city": "Vinnytsia",
+    "owner": "Kontaktinhaber",
+    "email": "E-Mail:",
+    "phone": "Telefon:",
+    "social": "Soziale Netzwerke:",
+    "database": "Datenbankinformationen:"
+  },
+  "sendResetPwd": {
+    "hero": "Passwort zurücksetzen senden",
+    "email": "E-Mail",
+    "sendBtn": "Senden"
+  },
+  "resPwd": {
+    "newPwd": "Neues Passwort",
+    "confPwd": "Passwort bestätigen",
+    "resetting": "Wird zurückgesetzt...",
+    "reset": "Passwort zurücksetzen"
+  }
+}

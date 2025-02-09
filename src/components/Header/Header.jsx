@@ -69,7 +69,7 @@ const Header = () => {
         {isLoggedIn && (
           <button
             onClick={() => dispatch(logout())}
-            className="btn btn-secondary h:"
+            className="btn btn-secondary px-8"
           >
             {t("exit")}
           </button>

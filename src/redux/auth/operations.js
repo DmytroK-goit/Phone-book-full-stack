@@ -58,7 +58,7 @@ export const login = createAsyncThunk(
   async (credentials, thunkApi) => {
     try {
       const { data } = await mongodb.post("auth/login", credentials);
-      // toast.success("Success");
+      toast.success("Success");
       setAuthHeader(data.data.accessToken);
       return data;
     } catch (error) {

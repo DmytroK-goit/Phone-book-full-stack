@@ -4,6 +4,7 @@ import { initReactI18next } from "react-i18next";
 import enTranslation from "../public/locales/en/translation.json";
 import ukTranslation from "../public/locales/uk/translation.json";
 import frTranslation from "../public/locales/fr/translation.json";
+import deTranslation from "../public/locales/de/translation.json";
 
 i18n.use(initReactI18next).init({
   resources: {
@@ -15,6 +16,9 @@ i18n.use(initReactI18next).init({
     },
     uk: {
       translation: ukTranslation,
+    },
+    de: {
+      translation: deTranslation,
     },
   },
   lng: "en",

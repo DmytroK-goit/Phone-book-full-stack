@@ -1,20 +1,52 @@
 import PropTypes from "prop-types";
 import { Formik, Form, Field } from "formik";
 import { useDispatch } from "react-redux";
+import { useState, useEffect } from "react";
 import { editContact } from "../../redux/contacts/operations";
 
 const EditContactModal = ({ contact, onClose }) => {
+  console.log(contact);
   const dispatch = useDispatch();
+  const [selectedFile, setSelectedFile] = useState(null);
 
   const initialValues = {
     name: contact.name || "",
     phoneNumber: contact.phoneNumber || "",
     email: contact.email || "",
     contactType: contact.contactType || "",
+    photo: null,
+  };
+
+  useEffect(() => {
+    setSelectedFile(null);
+  }, [contact]);
+
+  const handleFileChange = (event, setFieldValue) => {
+    const file = event.currentTarget.files[0];
+    setSelectedFile(file);
+    setFieldValue("photo", file);
   };
 
   const handleSubmit = (values) => {
-    dispatch(editContact({ _id: contact._id, updatedData: values }));
+    const formData = new FormData();
+
+    Object.entries(values).forEach(([key, value]) => {
+      if (key === "photo") {
+        if (selectedFile) {
+          formData.append("photo", selectedFile);
+        } else {
+          formData.append("photo", contact.photo);
+        }
+      } else if (key !== "email") {
+        formData.append(key, value);
+      }
+    });
+
+    formData.forEach((value, key) => {
+      console.log(key, value);
+    });
+
+    dispatch(editContact({ _id: contact._id, updatedData: formData }));
     onClose();
   };
 
@@ -23,52 +55,63 @@ const EditContactModal = ({ contact, onClose }) => {
       <div className="bg-white rounded-lg p-6 w-full max-w-md">
         <h2 className="text-2xl font-bold mb-4">Edit Contact</h2>
         <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-          <Form>
-            <div className="mb-4">
-              <Field
-                name="name"
-                type="text"
-                placeholder="Name"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                required
-              />
-            </div>
-            <div className="mb-4">
-              <Field
-                name="phoneNumber"
-                type="text"
-                placeholder="Phone Number"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                required
-              />
-            </div>
-            <div className="mb-4">
-              <Field
-                name="email"
-                type="email"
-                placeholder="Email"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                required
-              />
-            </div>
-            <div className="mb-4">
-              <Field
-                name="contactType"
-                type="text"
-                placeholder="Contact Type"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                required
-              />
-            </div>
-            <div className="flex justify-end mt-4">
-              <button
-                type="submit"
-                className="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              >
-                Save Changes
-              </button>
-            </div>
-          </Form>
+          {({ setFieldValue }) => (
+            <Form>
+              <div className="mb-4">
+                <Field
+                  name="name"
+                  type="text"
+                  placeholder="Name"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  required
+                />
+              </div>
+              <div className="mb-4">
+                <Field
+                  name="phoneNumber"
+                  type="text"
+                  placeholder="Phone Number"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  required
+                />
+              </div>
+              <div className="mb-4">
+                <Field
+                  name="email"
+                  type="email"
+                  placeholder="Email"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  required
+                />
+              </div>
+              <div className="mb-4">
+                <Field
+                  name="contactType"
+                  type="text"
+                  placeholder="Contact Type"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  required
+                />
+              </div>
+              <div className="mb-4">
+                <input
+                  name="photo"
+                  type="file"
+                  accept="image/jpeg, image/png, image/jpg"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  onChange={(event) => handleFileChange(event, setFieldValue)}
+                />
+              </div>
+              <div className="flex justify-end mt-4">
+                <button
+                  type="submit"
+                  className="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
+                  Save Changes
+                </button>
+              </div>
+            </Form>
+          )}
         </Formik>
         <div className="flex justify-end mt-4">
           <button

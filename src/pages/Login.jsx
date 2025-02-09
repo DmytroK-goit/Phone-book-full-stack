@@ -27,9 +27,7 @@ const Login = () => {
         toast(`Welcome, ${res.user.name}!`);
         navigate("/");
       })
-      .catch(() => {
-        toast.error("invalid credentials");
-      });
+      .catch(() => {});
     options.resetForm();
   };
   if (loading) {
@@ -37,7 +35,6 @@ const Login = () => {
   }
   return (
     <>
-     
       <div className="hero min-h-screen bg-inherit">
         <div className="hero-content flex-col lg:flex-row-reverse">
           <div className="text-center lg:text-left">
