@@ -19,7 +19,7 @@ const Footer = () => {
           {t("phoneBook")}
         </Link>
       </motion.div>
-      <address className="not-italic">
+      <address className="not-italic flex flex-col items-center">
         <p className="font-medium text-2xl">{t("footer.country")}</p>
         <p className="font-medium text-2xl">{t("footer.city")}</p>
         <p className="font-medium text-2xl">2025</p>

@@ -7,6 +7,7 @@ import { selectIsLoggedIn, selectUserName } from "../../redux/auth/selectors";
 import { logout } from "../../redux/auth/operations";
 import { LanguageSwitcher } from "../SwitchTransator/LanguageSwitcher";
 import { useTranslation } from "react-i18next";
+import ShinyText from "../ShinyText/ShinyText";
 
 const Header = () => {
   const { t } = useTranslation();
@@ -36,15 +37,7 @@ const Header = () => {
           {t("phoneBook")}
         </Link>
       </motion.div>
-      {isLoggedIn && (
-        <motion.div
-          whileHover={{ scale: 1.4, textDecoration: "underline" }}
-          transition={{ duration: 0.4 }}
-          className="text-sm sm:text-base items-center lg:text-4xl"
-        >
-          {t("welcome", { userName: capitalizeFirstLetter(userName) })}
-        </motion.div>
-      )}
+      {isLoggedIn && <ShinyText userName={userName} />}
       <div className="flex justify-between items-center gap-5">
         <NavLink className={buildLinkClass} to="/">
           {t("gethome")}
